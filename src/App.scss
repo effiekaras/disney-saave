@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+}
+
+.navbar {
+  display: flex;
+  background-color: #6B9D94;
+  ul {
+    display: flex;
+    list-style: none;
+    li {
+      margin: auto 20px;
+    }
+  }
+}
