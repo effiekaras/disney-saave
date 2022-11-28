@@ -1,0 +1,131 @@
+.detailButtons {
+    display: flex;
+    justify-content: center;
+}
+
+.detailButton {
+    background-color: #679CEC;
+    width: 100px;
+    height: 50px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    margin: 2%;
+}
+
+.detailButton:hover {
+    background-color: #8eb5f1;
+}
+
+.container {
+    background-color: #D9D9D9;
+    min-width: 80%;
+    min-height: 500px;
+    margin: 5%;
+    position: absolute;
+}
+
+.description {
+    white-space: pre-wrap;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+
+.detailimg {
+    position: relative;
+    margin-top: 10px;
+    max-height: 300px;
+    max-width: 80%;
+}
+
+.modal {
+    background-color: #30B0C1;
+    position: relative;
+    height: 530px;
+    width: 60%;
+    margin: auto;
+    margin-top: 10%;
+    text-align: center;
+}
+
+#x {
+    cursor: pointer;
+    font-size: 25px;
+    align-self: right;
+    background-color: transparent;
+    border:none;
+    outline: none;
+    float:right;
+    z-index: 9;
+    position:static;
+}
+#x:hover {
+    color: #4d4d4d;
+}
+
+#modalTitle {
+    color: white;
+    width: 80%;
+    margin: auto;
+    font-size: 20px;
+    margin-top: 30px;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+}
+
+#listContainer {
+    overflow-y: auto;
+    width: 80%;
+    max-height: 400px;
+    margin: auto;
+    margin-top: 2%;
+    margin-bottom: 5%;
+}
+
+#listBox {
+    background-color: white;
+    height: 80px;
+    text-align: center;
+    position: relative;
+}
+
+#listBox + #listBox {
+    margin-top: 5%;
+}
+
+#listBox:hover {
+    cursor: pointer;
+    color: #4d4d4d;
+}
+
+#createList {
+    font-size: 18px;
+    background-color: transparent;
+    border:none;
+    outline: none;
+    cursor: pointer;
+    font-weight: bold;
+    bottom: 2%;
+    margin: auto;
+
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+#createList:hover {
+    color: #4d4d4d;
+}
+
+.listName {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 20px;
+}
