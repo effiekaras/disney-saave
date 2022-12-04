@@ -15,7 +15,7 @@ function App() {
       <div className="App">
         <nav className="navbar">
           <div className="app-title">
-            <h1>Studio Ghibli Fans</h1>
+            <h1>Disney Fans</h1>
           </div>
           <ul>
             <li>
