@@ -1,7 +1,7 @@
 .buttonBar {
     display: flex;
-    margin: auto;
     justify-content:center;
+    flex-wrap: wrap;
   }
 
 .grid {
@@ -52,11 +52,10 @@
     font-size: 18px;
     border: none;
     cursor: pointer;
-    margin: 2%;
-
+    margin:2%;
   }
 
-.button:hover, .button:focus {
+.button:hover, .button:focus, .button:target {
     background-color: #d9f2dc;
 } 
 
