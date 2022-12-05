@@ -15,20 +15,20 @@ function App() {
       <div className="App">
         <nav className="navbar">
           <div className="app-title">
-            <h1>Studio Ghibli Fans</h1>
+            <h1>Disney Fans</h1>
           </div>
           <ul>
             <li>
-              <Link to="/">About</Link>
+              <Link className="a" to="/">About</Link>
             </li>
             <li>
-              <Link to="/community">Community</Link>
+              <Link className="a" to="/community">Community</Link>
             </li>
             <li>
-              <Link to="/gallery">Gallery</Link>
+              <Link className="a" to="/gallery">Gallery</Link>
             </li>
             <li>
-              <Link to="/login">My Account</Link>
+              <Link className="a" to="/login">My Account</Link>
             </li>
           </ul>
         </nav>

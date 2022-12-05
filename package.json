@@ -1,8 +1,33 @@
 {
+<<<<<<< HEAD
   "name": "final-project",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+=======
+  "name": "final_project",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.2.0",
+    "bootstrap": "^5.2.3",
+    "first-image-search-load": "^0.4.0",
+    "fs": "^0.0.1-security",
+    "googleapis": "^109.0.1",
+    "mdb-react-ui-kit": "^5.0.0",
+    "moment": "^2.29.4",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.6.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.3",
+    "react-scripts": "^5.0.1",
+    "scss": "^0.2.4",
+    "web-vitals": "^2.1.4"
+  },
+>>>>>>> 8eac706a0bc9ab4002459fa4048d418ec9043f23
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "npm start --prefix server",
