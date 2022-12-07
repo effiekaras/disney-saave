@@ -31,7 +31,7 @@ function Detail() {
         if (path) {
           return getImage(path);
         } else {
-          return `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtrPMpWbHOGEXiyZ7au75btz1wRmc60SL7aobwQWRUj7rGIw3a1VSISsx1y1xuiVOPG54&usqp=CAU`;
+          return `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPcCjIVG3qv2QeXJ8vMgsoItp4-EzaL1oRb350awDfo0JgZuRASQXUSd2_p7yIGBv98b8&usqp=CAU`;
         }
     }
 

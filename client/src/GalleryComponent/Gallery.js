@@ -1,8 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {useParams, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 import './Gallery.scss';
-import { getDefaultNormalizer, waitFor } from '@testing-library/react';
+
+import { Fragment } from 'react';
+import ScrollButton from './ScrollButton';
+import { Content, Heading } from './Styles';
+
 
 const BASE_URL = "https://api.themoviedb.org/3";
 const getImage = (path) => `https://image.tmdb.org/t/p/w342/${path}`;
@@ -17,7 +21,7 @@ function Gallery() {
     const [data, setData] = React.useState([]);
     const [buttonData, setButtonData] = React.useState([]);
     const [searchInput, setSearchInput] = React.useState("");
-    const [genre, setGenre] = React.useState("");
+    const [genre, setGenre] = React.useState("");    
     
     const handleClick = (e) => {
         e.preventDefault();
@@ -28,7 +32,7 @@ function Gallery() {
         if (path) {
           return getImage(path);
         } else {
-          return `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtrPMpWbHOGEXiyZ7au75btz1wRmc60SL7aobwQWRUj7rGIw3a1VSISsx1y1xuiVOPG54&usqp=CAU`;
+          return `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPcCjIVG3qv2QeXJ8vMgsoItp4-EzaL1oRb350awDfo0JgZuRASQXUSd2_p7yIGBv98b8&usqp=CAU`;
         }
       }
 
@@ -65,9 +69,9 @@ function Gallery() {
 
     React.useEffect(() => {
       setGenre("");
-      setData(movies)
-      setFilteredData(movies);
-      setButtonData(movies);
+      setData([...new Set(movies)])
+      setFilteredData([...new Set(movies)]);
+      setButtonData([...new Set(movies)]);
     }, [movies])
   
     React.useEffect(() => {
@@ -178,17 +182,16 @@ function Gallery() {
         } }
       }, [searchInput, button]);
     return (
+      <Fragment>
         <header id="gallery-body">
           <div className="filler"></div>
-    <div className="searchBox">
-      <i className="fa-solid fa-magnifying-glass mag"></i>
+        <div className="searchBox">
         <input className="searchbar"
           type="search"
           placeholder={"search for " + genre + "movies..."}
           onChange={handleChange}
           value={searchInput} />
     </div>
-
     <section className="buttonBar">
           <button className="button" value="" onClick={e => handleClick(e)}>All</button>
           <button className="button" value="28" onClick={e => handleClick(e)}>Action</button>
@@ -212,7 +215,9 @@ function Gallery() {
           </Link>
         ))}  
       </div>
+      <ScrollButton />
     </header>
+    </Fragment>
     )
 }
 
