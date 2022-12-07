@@ -1,0 +1,24 @@
+.profile-container {
+    margin: auto;
+    width: 80%;
+}
+
+.spacing {
+    padding: 30px;
+}
+
+.user {
+    display: flex;
+    margin: 0 10%;
+}
+
+.user-snapshot {
+    display: block;
+    width: 25%;
+}
+
+.user-details {
+    display: block;
+    width: 75%;
+    text-align: left;
+}
