@@ -179,6 +179,7 @@ function Gallery() {
       }, [searchInput, button]);
     return (
         <header id="gallery-body">
+          <div className="filler"></div>
     <div className="searchBox">
       <i className="fa-solid fa-magnifying-glass mag"></i>
         <input className="searchbar"

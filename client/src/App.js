@@ -9,15 +9,36 @@ import Login from './AuthComponents/Login.js';
 import Register from './AuthComponents/Register.js';
 import './App.scss';
 
+window.onscroll = function() {scrollFunction()};
+function scrollFunction() {
+  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+    document.getElementsByClassName("navbar")[0].style.padding = "0px";
+    document.getElementById("title").style.fontSize = "45px";
+    document.getElementsByClassName("a")[0].style.fontSize = "20px";
+    document.getElementsByClassName("a")[1].style.fontSize = "20px";
+    document.getElementsByClassName("a")[2].style.fontSize = "20px";
+    document.getElementsByClassName("a")[3].style.fontSize = "20px";
+
+  } else {
+    document.getElementsByClassName("navbar")[0].style.padding = "10px";
+    document.getElementById("title").style.fontSize = "50px";
+    document.getElementsByClassName("a")[0].style.fontSize = "25px";
+    document.getElementsByClassName("a")[1].style.fontSize = "25px";
+    document.getElementsByClassName("a")[2].style.fontSize = "25px";
+    document.getElementsByClassName("a")[3].style.fontSize = "25px";
+
+}
+}
+
 function App() {
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <div className="App">
         <nav className="navbar">
           <div className="app-title">
-            <h1>Disney Fans</h1>
+            <h1 id="title">Disney Fans</h1>
           </div>
-          <ul>
+          <ul className="tabs">
             <li>
               <Link className="a" to="/">About</Link>
             </li>

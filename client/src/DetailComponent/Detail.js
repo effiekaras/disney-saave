@@ -6,20 +6,10 @@ import moment from 'moment'
 
 import axios from 'axios';
 import './Detail.scss';
-import {
-    MDBBtn,
-    MDBModal,
-    MDBModalDialog,
-    MDBModalContent,
-    MDBModalHeader,
-    MDBModalTitle,
-    MDBModalBody,
-    MDBModalFooter,
-  } from 'mdb-react-ui-kit';
 
-  const getImage = (path) => `https://image.tmdb.org/t/p/w342/${path}`;
-  const api_key = "59dd51057d034c78c09b0129b62b2de9";
-  const BASE_URL = "https://api.themoviedb.org/3";
+const getImage = (path) => `https://image.tmdb.org/t/p/w342/${path}`;
+const api_key = "59dd51057d034c78c09b0129b62b2de9";
+const BASE_URL = "https://api.themoviedb.org/3";
 
 
 
