@@ -22,6 +22,8 @@
     min-width: 80%;
     min-height: 500px;
     margin: 5%;
+    margin-top: 0px;
+    margin-top: 40px;
     position: absolute;
 }
 
@@ -44,7 +46,7 @@
     height: 530px;
     width: 60%;
     margin: auto;
-    margin-top: 10%;
+    margin-top:80px;
     text-align: center;
 }
 
@@ -127,4 +129,8 @@
     cursor: pointer;
     font-weight: bold;
     font-size: 20px;
+}
+
+#detail {
+    padding-top: 80px;
 }
