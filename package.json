@@ -1,10 +1,4 @@
 {
-<<<<<<< HEAD
-  "name": "final-project",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-=======
   "name": "final_project",
   "version": "0.1.0",
   "private": true,
@@ -14,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.0",
     "bootstrap": "^5.2.3",
+    "concurrently": "^7.6.0",
     "first-image-search-load": "^0.4.0",
     "fs": "^0.0.1-security",
     "googleapis": "^109.0.1",
@@ -24,10 +19,11 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",
     "react-scripts": "^5.0.1",
+    "sass": "^1.56.1",
     "scss": "^0.2.4",
+    "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
   },
->>>>>>> 8eac706a0bc9ab4002459fa4048d418ec9043f23
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "npm start --prefix server",
@@ -44,8 +40,5 @@
   "bugs": {
     "url": "https://gitlab.com/saave/final-project/issues"
   },
-  "homepage": "https://gitlab.com/saave/final-project#readme",
-  "dependencies": {
-    "concurrently": "^7.6.0"
-  }
+  "homepage": "https://gitlab.com/saave/final-project#readme"
 }

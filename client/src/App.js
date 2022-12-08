@@ -8,6 +8,7 @@ import Gallery from './GalleryComponent/Gallery.js';
 import Login from './AuthComponents/Login.js';
 import Register from './AuthComponents/Register.js';
 import './App.scss';
+import { PersonDetail } from './components/PersonDetail.jsx';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Routes>
           <Route path="/detail/:id" element={<Detail />}/>
           <Route path="/profile/:id" element={<Profile />}/>
+          <Route path="/user/:username" element={<PersonDetail />}/>
           <Route path="/community" element={<Community />}/>
           <Route path="/gallery" element={<Gallery />}/>
           <Route path="/login" element={<Login />}/>
