@@ -3,7 +3,7 @@ import {useParams, Link} from 'react-router-dom';
 import axios from 'axios';
 import './Carousel.scss';
 
-function Carousel() {
+function Carousel(props) {
     return (
         <div>
             <p>carousel component</p>

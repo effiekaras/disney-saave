@@ -15,10 +15,37 @@
 .user-snapshot {
     display: block;
     width: 25%;
+    margin: 0 auto;
 }
 
 .user-details {
     display: block;
     width: 75%;
     text-align: left;
+    padding: 0 5%;
+    margin: 0;
+}
+
+.profile-pic {
+    width: 80%;
+}
+
+@media only screen and (min-width: 400px) {
+    .user {
+        display: block;
+    }
+    .user-details {
+        text-align: center;
+        margin: auto;
+    }
+}
+
+@media only screen and (min-width: 961px) {
+    .user {
+        display: flex;
+    }
+    .user-details {
+        text-align: left;
+        margin: 0;
+    }
 }

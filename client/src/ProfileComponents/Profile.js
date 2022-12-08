@@ -21,7 +21,7 @@ function Profile() {
             <div className="spacing"></div>
             <div className="user">
                 <div className="user-snapshot">
-                    <img src={defaultAvatar} alt="default gray avatar"/>
+                    <img className="profile-pic" src={defaultAvatar} alt="default gray avatar"/>
                     <br /><br />
                     <Button variant="primary">FOLLOW</Button>
                     <br /><br />
@@ -34,12 +34,11 @@ function Profile() {
                     <h2>Biography:</h2>
                     <p>{user && user.bio}</p>
                     <h2>Favorites:</h2>
-                    <Carousel />
+                    <Carousel list_id={user && user.lists[0]}/>
                     <h2>Custom Lists:</h2>
-                    <h4>List #1:</h4>
-                    <Carousel />
-                    <h4>List #2:</h4>
-                    <Carousel />
+                    {user && user.lists.map(list_id => (
+                        <Carousel list_id={list_id} key={list_id}/>
+                    ))}
                 </div>
             </div>
         </div>
