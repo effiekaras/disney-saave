@@ -6,20 +6,10 @@ import moment from 'moment'
 
 import axios from 'axios';
 import './Detail.scss';
-import {
-    MDBBtn,
-    MDBModal,
-    MDBModalDialog,
-    MDBModalContent,
-    MDBModalHeader,
-    MDBModalTitle,
-    MDBModalBody,
-    MDBModalFooter,
-  } from 'mdb-react-ui-kit';
 
-  const getImage = (path) => `https://image.tmdb.org/t/p/w342/${path}`;
-  const api_key = "59dd51057d034c78c09b0129b62b2de9";
-  const BASE_URL = "https://api.themoviedb.org/3";
+const getImage = (path) => `https://image.tmdb.org/t/p/w342/${path}`;
+const api_key = "59dd51057d034c78c09b0129b62b2de9";
+const BASE_URL = "https://api.themoviedb.org/3";
 
 
 
@@ -41,7 +31,7 @@ function Detail() {
         if (path) {
           return getImage(path);
         } else {
-          return `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtrPMpWbHOGEXiyZ7au75btz1wRmc60SL7aobwQWRUj7rGIw3a1VSISsx1y1xuiVOPG54&usqp=CAU`;
+          return `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPcCjIVG3qv2QeXJ8vMgsoItp4-EzaL1oRb350awDfo0JgZuRASQXUSd2_p7yIGBv98b8&usqp=CAU`;
         }
     }
 

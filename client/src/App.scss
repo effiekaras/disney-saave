@@ -9,8 +9,13 @@
 }
 
 .navbar {
+  top:0;
+  transition: 0.3s;
   max-height: 80px;
   width: 100%;
+  position: fixed;
+  padding: 10px;
+  z-index: 99;
   display: flex;
   background-color: #6B9D94;
   ul {
@@ -39,29 +44,35 @@
       transform: scale(1.06);
     }
     .a {
+      transition: 0.3s;
       text-decoration: none;
       color: white;
       float: left;
       text-align: center;
       padding: 8px;
       text-decoration: none;
-      line-height: 25px;
       border-radius: 8px;
+      font-size: 25px;
     }
   }
 
+.tabs {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(0%, -50%);
+}
+
   .app-title {
-    margin: 0px;
-    margin-left: 50px;
+    margin: auto;
+    margin-left: 25px;
     color: white;
     -webkit-text-stroke: 1px black;
 
     h1 {
-      @include vertical-div;
-      font-size: 45px;
-      top: 0%;
-
+      margin: auto;
+      font-size: 50px;
+      transition: 0.3s;
     }
   }
 }
-

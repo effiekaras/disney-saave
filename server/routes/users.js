@@ -94,6 +94,11 @@ module.exports = function (router) {
             name = user[0].name;
         }
 
+        var password = user[0].password;
+        if (req.body.password) {
+            password = req.body.password;
+        }
+
         var bio = "";
         if (req.body.bio) {
             bio = req.body.bio;
@@ -152,7 +157,7 @@ module.exports = function (router) {
         }
 
 
-        await User.findByIdAndUpdate(user[0]._id, {name: name, bio: bio, avatar: avatar, following: following, lists: lists});
+        await User.findByIdAndUpdate(user[0]._id, {name: name, password: password, bio: bio, avatar: avatar, following: following, lists: lists});
         var newuser = await User.findById(user[0]._id);
         res.status(200);
         res.json({message: "User updated", data: newuser});
