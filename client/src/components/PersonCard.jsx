@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import styled from 'styled-components';
+import defaultAvatar from '../ProfileComponents/avatars/grayavatar.png';
 
 const PersonCardWrapper = styled.div`
     display: inline-grid;
@@ -10,9 +11,10 @@ const PersonCardWrapper = styled.div`
     width: 400px;
     padding: 2em;
     background: #f2f2f2;  // change to white later
+    word-wrap: break-word;
 
     .following {
-        background: green;
+        background: #50C878;
     }
 
     .unfollowing {
@@ -21,6 +23,25 @@ const PersonCardWrapper = styled.div`
 
     button {
         width: 90px;
+        margin: 30px;
+    }
+    .usernameprop {
+        font-size: 1.5vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 180px;
+    }
+   
+    img {
+        margin-right:10px;
+    }
+    .emailprop {
+        font-size: 1.2vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 180px;
     }
 `
 
@@ -50,16 +71,18 @@ export const PersonCard = ({ username, email, avatar }) => {
     return (
         <PersonCardWrapper>
             <div>
-                <img src={avatar !== "default" || 'https://picsum.photos/150'} />
+                <img src={defaultAvatar} />
             </div>
             <div>
                 <a href={`/user/${username}`}> 
-                <h1>
+                <h1 className='usernameprop'>
                     @{ username }
                 </h1>
                 </a>
                 <h3>
-                    { email }
+                    <div className='emailprop'>
+                        { email }
+                    </div>
                 </h3>
                 <FollowButton />
             </div>

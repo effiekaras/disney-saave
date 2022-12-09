@@ -31,8 +31,8 @@ function Community() {
 
     return (
         <div>
-            <h1>community component</h1>
-            <input type="text" onChange={(e) => setQuery(e.target.value)} placeholder={'Search...'}/>
+            <h1 className='page-title'>Meet new people!</h1>
+            <input type="text" className='search-bar' onChange={(e) => setQuery(e.target.value)} placeholder={'Search...'}/>
             <PersonGrid people={!query ? people : matches} />
         </div>
     )
