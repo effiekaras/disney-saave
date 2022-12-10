@@ -6,7 +6,7 @@
 .detailButton {
     background-color: #679CEC;
     width: 100px;
-    height: 50px;
+    height: 55px;
     font-size: 18px;
     border: none;
     cursor: pointer;
@@ -66,7 +66,7 @@
 }
 
 #modalTitle {
-    color: white;
+    color: black;
     width: 80%;
     margin: auto;
     font-size: 20px;
@@ -82,11 +82,11 @@
     max-height: 400px;
     margin: auto;
     margin-top: 2%;
-    margin-bottom: 5%;
+    margin-bottom: 9%;
 }
 
 #listBox {
-    background-color: white;
+    background-color: #D3D3D3;
     height: 80px;
     text-align: center;
     position: relative;
@@ -132,5 +132,14 @@
 }
 
 #detail {
-    padding-top: 80px;
+    padding-top: 30px;
+}
+
+.text {
+    color: white;
+    text-align: center; 
+    text-decoration: none;
+}
+.text:hover {
+    color: white;
 }

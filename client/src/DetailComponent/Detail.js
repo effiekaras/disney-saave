@@ -97,7 +97,7 @@ return (
     <div className="detailButtons">
     <>
         <Button className="detailButton" onClick={toggleShow}>
-        Add to List
+        <div className="text">Add to List</div>
         </Button>
 
         <Modal className="modal" show={basicModal}  tabIndex='-1'>
@@ -116,9 +116,10 @@ return (
         </Modal>
     </>
 
-    <button className=" detailButton">
-    <Link  to={`/gallery`} className="linkWrapper">Back to Gallery</Link>
-    </button>
+    <Button className="detailButton">
+    <Link  to={`/gallery`} className="text">Back to Gallery</Link>
+    </Button>
+
     </div>
     </div>
     </div></div>

@@ -2,15 +2,16 @@ import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import './Gallery.scss';
+import Button from 'react-bootstrap/Button';
 
 import { Fragment } from 'react';
 import ScrollButton from './ScrollButton';
-import { Content, Heading } from './Styles';
 
 
 const BASE_URL = "https://api.themoviedb.org/3";
 const getImage = (path) => `https://image.tmdb.org/t/p/w342/${path}`;
 const api_key = "59dd51057d034c78c09b0129b62b2de9";
+const buttons = [0, 12, 28, 80, 35, 18, 14, 9648, 10749]
 
 function Gallery() {
   const api = axios.create({ baseURL: BASE_URL });
@@ -26,6 +27,12 @@ function Gallery() {
     const handleClick = (e) => {
         e.preventDefault();
         setButton(e.target.value);
+        buttons.forEach((i) => {
+          if (i != e.target.value) {
+            document.getElementById(i).classList.remove('light');
+          }
+        })
+        e.target.classList.add('light');
       }; 
 
       function getImageFunc(path) {
@@ -193,15 +200,15 @@ function Gallery() {
           value={searchInput} />
     </div>
     <section className="buttonBar">
-          <button className="button" value="" onClick={e => handleClick(e)}>All</button>
-          <button className="button" value="28" onClick={e => handleClick(e)}>Action</button>
-          <button className="button" value="12" onClick={e => handleClick(e)}>Adventure</button>
-          <button className="button" value="80" onClick={e => handleClick(e)}>Crime</button>
-          <button className="button"value="35" onClick={e => handleClick(e)}>Comedy</button>
-          <button className="button" value="18" onClick={e => handleClick(e)}>Drama</button>
-          <button className="button" value="14" onClick={e => handleClick(e)}>Fantasy</button>
-          <button className="button" value="9648" onClick={e => handleClick(e)}>Mystery</button>
-          <button className="button" value="10749" onClick={e => handleClick(e)} >Romance</button>
+          <Button className="button" value="0" id="0" onClick={e => handleClick(e)}>All</Button>
+          <Button className="button" value="28" id="28" onClick={e => handleClick(e)}>Action</Button>
+          <Button className="button" value="12" id="12" onClick={e => handleClick(e)}>Adventure</Button>
+          <Button className="button" value="80" id="80" onClick={e => handleClick(e)}>Crime</Button>
+          <Button className="button"value="35" id="35" onClick={e => handleClick(e)}>Comedy</Button>
+          <Button className="button" value="18" id="18" onClick={e => handleClick(e)}>Drama</Button>
+          <Button className="button" value="14" id="14" onClick={e => handleClick(e)}>Fantasy</Button>
+          <Button className="button" value="9648" id="9648" onClick={e => handleClick(e)}>Mystery</Button>
+          <Button className="button" value="10749" id="10749" onClick={e => handleClick(e)} >Romance</Button>
           </section>
 
         <div className="grid">
