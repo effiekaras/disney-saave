@@ -6,6 +6,7 @@
     margin-left: 50px;
     margin-right: 50px;
     padding: 20px;
+    border-radius: 40px;
 }
 
 .second {
@@ -14,4 +15,23 @@
     padding: 20px;
     text-align: left;
     margin-top: 75px;
+    font-family: 'New Walt Disney Font', sans-serif;
+    font-size: 30px;
 }
+
+/* The grid: Four equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 25%;
+    padding: 10px;
+  }
+  
+  /* Style the images inside the grid */
+  .column img {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+  
+  .column img:hover {
+    opacity: 1;
+  }
