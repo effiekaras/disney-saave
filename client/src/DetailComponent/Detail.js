@@ -86,7 +86,6 @@ return (
     <section> 
     <div className="grid" id="detail">
     <div className="container">
-    <div className="modal-content">
     <h1 id="title"> {data.original_title} <i className="fa-regular fa-heart" onClick={(e)=>{favorite(e)}}></i></h1>
     <div className="sideways">
     <img className="detailimg" src={getImageFunc(data.poster_path)}/>
@@ -126,7 +125,7 @@ return (
 
     </div>
     </div>
-    </div></div>
+    </div>
     </section>
     )
 }
