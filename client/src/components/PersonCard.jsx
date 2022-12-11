@@ -5,15 +5,19 @@ import defaultAvatar from '../ProfileComponents/avatars/grayavatar.png';
 
 const PersonCardWrapper = styled.div`
     display: inline-grid;
+    box-shadow: 2px 5px #c4d8d4;
     grid-gap: 3px;
     grid-template-columns: 1fr 1fr;
     text-align: left;
     width: 400px;
     padding: 2em;
-    background: #f2f2f2;  // change to white later
+    background: #f0f5f4	;  // change to white later
     word-wrap: break-word;
     font-family: 'New Walt Disney Font', sans-serif;
     font-size: 20px;
+    border-radius: 18px;
+    margin: 2%;
+
 
     .following {
         background: #50C878;
