@@ -140,10 +140,11 @@ module.exports = function (router) {
 
         if (req.body.unfollowing) {
             following = user[0].following;
+            var unfollowing = req.body.unfollowing;
             const index1 = user[0].following.indexOf(unfollowing);
             following.splice(index1, 1);
 
-            var unfolloweduser = await User.find({username: following.toString()});
+            var unfolloweduser = await User.find({username: unfollowing});
 
             const index = unfolloweduser[0].followers.indexOf(user[0].username);
             unfolloweduser[0].followers.splice(index, 1);
