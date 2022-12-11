@@ -4,17 +4,21 @@ import axios from 'axios';
 import './Login.scss';
 import { Navigate, useNavigate } from 'react-router-dom';
 
+import { API_URL } from '../constants';
+
+export var isLoggedIn = '';
+
 function Login(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    var isLoggedIn = '';
+    // var isLoggedIn = '';
 
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        var nlink = 'http://localhost:4000/api/users/';
+        var nlink = `${API_URL}/users/`;
         nlink += username;
 
         fetch(nlink)
@@ -38,7 +42,7 @@ function Login(props) {
                     console.log('correct login info')
                     alert('Successfully logged in!')
                     isLoggedIn = username
-                    
+                    localStorage.setItem('username', username)
                 } else {
                     console.log('incorrect login info')
                     alert('Invalid password')
