@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useParams, Link} from 'react-router-dom';
 import axios from 'axios';
 import './Login.scss';
-import { Navigate, useNavigate  } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 function Login(props) {
     const [username, setUsername] = useState('');
@@ -34,7 +34,7 @@ function Login(props) {
                 console.log(parsed.data[0].name)
                 console.log(parsed.data[0].password)
 
-                if (parsed.data[0].name === username && parsed.data[0].password === password) {
+                if (parsed.data[0].username === username && parsed.data[0].password === password) {
                     console.log('correct login info')
                     alert('Successfully logged in!')
                     isLoggedIn = true
