@@ -8,7 +8,7 @@ export var isLoggedIn = false;
 function Login(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-   
+    var isLoggedIn = '';
 
     const navigate = useNavigate();
 
@@ -38,7 +38,7 @@ function Login(props) {
                 if (parsed.data[0].username === username && parsed.data[0].password === password) {
                     console.log('correct login info')
                     alert('Successfully logged in!')
-                    isLoggedIn = true
+                    isLoggedIn = username
                     
                 } else {
                     console.log('incorrect login info')
