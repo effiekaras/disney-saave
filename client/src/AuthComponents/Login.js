@@ -13,7 +13,6 @@ function Login(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(username);
 
         var nlink = 'http://localhost:4000/api/users/';
         nlink += username;
@@ -39,10 +38,13 @@ function Login(props) {
                     console.log('correct login info')
                     alert('Successfully logged in!')
                     isLoggedIn = true
+                    
                 } else {
                     console.log('incorrect login info')
                     alert('Invalid password')
                 }
+
+                console.log(isLoggedIn);
 
             } catch (err) {
                 console.log('Error: ', err.message)
@@ -88,4 +90,3 @@ export default Login;
 // about page
 // get alert for Register
 // put in favorites list
-// alert for invalid username
