@@ -11,6 +11,8 @@
 .user {
     display: flex;
     margin: 0 10%;
+    font-family: 'New Walt Disney Font', sans-serif;
+    font-size: large;
 }
 
 .user-snapshot {
@@ -25,10 +27,19 @@
     text-align: left;
     padding: 0 5%;
     margin: 0;
+    font-family: 'New Walt Disney Font', sans-serif;
+    font-size: large;
 }
 
 .profile-pic {
     width: 80%;
+}
+
+.name-and-settings {
+    display: flex;
+    img {
+        padding-left: 25%;
+    }
 }
 
 @media only screen and (min-width: 400px) {

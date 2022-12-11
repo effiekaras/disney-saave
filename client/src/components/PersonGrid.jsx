@@ -5,20 +5,21 @@ import { PersonCard } from './PersonCard';
 import styled from 'styled-components';
 
 const PersonGridWrapper = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 4em;
-
     text-align: center;
     justify-items: center;
+    font-family: 'New Walt Disney Font', sans-serif;
+    font-size: larger;
 
-    width: 80%;
+    width: 98%;
     margin: auto;
     padding: 4em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    position: relative;
 `
 
 export const PersonGrid = ({ people }) => {
-
 
     if (people.length === 0) {
         return <h1>No people!</h1>

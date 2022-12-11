@@ -19,19 +19,10 @@
     font-size: 30px;
 }
 
-/* The grid: Four equal columns that floats next to each other */
-.column {
-    float: left;
-    width: 25%;
-    padding: 10px;
-  }
-  
-  /* Style the images inside the grid */
-  .column img {
-    opacity: 0.8;
-    cursor: pointer;
-  }
-  
-  .column img:hover {
-    opacity: 1;
-  }
+.two {
+    width:320px;
+    height:220px;
+    border-radius: 40px;
+    padding:10px;
+    margin-right: 60px;
+}
