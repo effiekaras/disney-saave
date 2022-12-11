@@ -30,6 +30,7 @@
   }
 
 .gridimg {
+    border-radius: 20px;
     margin-top: 10px;
     width: 200px;
     height: 300px;
@@ -99,12 +100,11 @@
 }
 
 .searchBox {
-  padding-top: 90px;
   font-family: 'New Walt Disney Font', sans-serif;
   margin-top: 75px;
+  padding-top: 20px;
 }
 
 input:focus {
   outline: none;
-
 }

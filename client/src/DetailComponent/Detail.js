@@ -87,13 +87,17 @@ return (
     <div className="grid" id="detail">
     <div className="container">
     <div className="modal-content">
-    <h1> {data.original_title} <i className="fa-regular fa-heart" onClick={(e)=>{favorite(e)}}></i></h1>
-    <img className="gridimg" src={getImageFunc(data.poster_path)}/>
-    <p className="description">
-            {overview || "No overview available."} <br></br>
+    <h1 id="title"> {data.original_title} <i className="fa-regular fa-heart" onClick={(e)=>{favorite(e)}}></i></h1>
+    <div className="sideways">
+    <img className="detailimg" src={getImageFunc(data.poster_path)}/>
+    <p className="description" align="left">
+                {overview || "No overview available."} <br></br>
+            <br></br>
             Release Date: {moment(release, 'Y/M/D').format('MMMM D, Y')} <br></br>
+            <br></br>
             Genre: {JSON.stringify(genre, null, 2).replace(/['"]+/g, '').replace(/['[]+/g, '').replace(/['\]]+/g, '') || "N/A"} 
     </p>
+    </div>
     <div className="detailButtons">
     <>
         <Button className="detailButton" onClick={toggleShow}>

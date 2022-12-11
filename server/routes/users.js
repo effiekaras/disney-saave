@@ -130,15 +130,22 @@ module.exports = function (router) {
         var following = [];
         if (req.body.following) {
             following = user[0].following;
-            following.push(req.body.following);
+            var followeduser = await User.find({username: req.body.following});
 
-            //await User.findByIdAndUpdate(user[0]._id, {following: following});
+            // Check if this user is already in the following list
+            if (!following.includes(followeduser[0].username)) {
+                following.push(req.body.following);
+            }
 
-            var followeduser = await User.find({username: user[0].following.toString()});
-
-            followeduser[0].followers.push(user[0].username);
+            // Check if this user is already in the followers list
+            if (!followeduser[0].followers.includes(user[0].username)) {
+                followeduser[0].followers.push(user[0].username);
+            }
 
             await User.findByIdAndUpdate(followeduser[0]._id, {followers: followeduser[0].followers.toString()});
+
+            // Remove duplicates, just in case
+            following = [...new Set(following)];
         } else {
             following = user[0].following;
         }

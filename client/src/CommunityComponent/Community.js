@@ -5,6 +5,7 @@ import axios from 'axios';
 import { PersonGrid } from '../components/PersonGrid';
 
 import './styles.css'
+import { API_URL } from '../constants';
 
 
 function Community() {
@@ -16,7 +17,7 @@ function Community() {
 
     useEffect(() => {
         // Make API call to get people
-        fetch('http://localhost:4000/api/users').then((data) => {
+        fetch(`${API_URL}/users`).then((data) => {
             return data.json();
         }).then((json) => {
             setPeople(json.data);

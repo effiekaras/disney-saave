@@ -3,6 +3,7 @@ import {useParams, Link} from 'react-router-dom';
 import axios from 'axios';
 import './Register.scss';
 import { Navigate, useNavigate  } from 'react-router-dom';
+import { API_URL } from '../constants';
 
 
 function Register(props) {
@@ -20,7 +21,7 @@ function Register(props) {
             if (user.length === 0 || em.length === 0 || na.length === 0 || pass.length === 0) {
                 throw "Missing Required Fields";
             }
-            const response = await fetch('http://localhost:4000/api/users', {
+            const response = await fetch(`${API_URL}users`, {
              method: 'POST',
              headers: {
                'Content-Type': 'application/json'

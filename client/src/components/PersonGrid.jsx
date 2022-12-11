@@ -7,9 +7,7 @@ import styled from 'styled-components';
 const PersonGridWrapper = styled.div`
     text-align: center;
     justify-items: center;
-    font-family: 'New Walt Disney Font', sans-serif;
     font-size: larger;
-
     width: 98%;
     margin: auto;
     padding: 4em;
