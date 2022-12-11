@@ -1,0 +1,14 @@
+.avatar-grid {
+    display: grid;
+    grid-template-rows: repeat(4, 25%);
+    grid-template-columns: repeat(4, 25%);
+}
+
+.grid-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+        width: 100%;
+    }
+}

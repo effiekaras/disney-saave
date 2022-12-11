@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useParams, Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import './Profile.scss';
-import defaultAvatar from './avatars/grayavatar.png';
+import GetAvatar from './GetAvatar.js';
 
 let apiUrl = "http://localhost:4000/api";
 
@@ -44,7 +44,7 @@ function EditSettings() {
             <div className="spacing"></div>
             <div className="user">
                 <div className="user-snapshot">
-                    <img className="profile-pic" src={defaultAvatar} alt="default gray avatar"/>
+                    <img className="profile-pic" src={user && GetAvatar[user.avatar]} alt="default gray avatar"/>
                 </div>
                 <div className="user-details">
                     <form onSubmit={handleSubmit}>
