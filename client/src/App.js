@@ -36,7 +36,7 @@ function App() {
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <div className="App">
-        <nav className="navbar">
+        <nav className="navbar fixed-top">
           <div className="app-title">
             <h1 id="title">Disney Fans</h1>
           </div>

@@ -41,12 +41,12 @@
 }
 
 .modal {
-    background-color: #30B0C1;
+    background-color: rgba(0,0,0,.0001) !important;
     position: relative;
     height: 530px;
     width: 60%;
     margin: auto;
-    margin-top:80px;
+    margin-top:90px;
     text-align: center;
 }
 
@@ -132,7 +132,7 @@
 }
 
 #detail {
-    padding-top: 30px;
+    padding-top: 90px;
 }
 
 .text {
