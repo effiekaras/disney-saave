@@ -9,6 +9,9 @@ const PersonDetailWrapper = styled.div`
     width: 75%;
     margin: auto;
     padding: 2em;
+    // margin-top: 6%;
+    font-family: 'New Walt Disney Font', sans-serif;
+    font-size: larger;
     margin-top: 70px;
     background: #f2f2f2;  // change to white later
 
