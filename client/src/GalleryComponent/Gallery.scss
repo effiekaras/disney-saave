@@ -2,6 +2,7 @@
     display: flex;
     justify-content:center;
     flex-wrap: wrap;
+    font-family: 'New Walt Disney Font', sans-serif;
   }
 
 .grid {
@@ -40,6 +41,8 @@
 
 .narrow {
     margin-bottom : 6px;
+    font-family: 'New Walt Disney Font', sans-serif;
+    font-size: large;
   }
 
 .item:hover, .item:active, .item:focus {
@@ -52,12 +55,14 @@
     width: 100px;
     height: 50px;
     background-color: #A8E1AE !important;
-    font-size: 18px !important;
+    font-size: 25px !important;
     border: none !important;
     cursor: pointer;
     margin:2%;
     border-radius: 8px;
     color: black !important;
+    font-family: 'New Walt Disney Font', sans-serif;
+    // font-size: 50;
   }
 .light {
   background-color: #d9f2dc !important;
@@ -75,7 +80,7 @@
     border-radius: 20px;
     appearance: none;
     margin-top: 2%;
-    font-size: 20px;
+    font-size: 25px;
     border-top: none;
     margin-left: 3px;
 
@@ -88,10 +93,14 @@
     border: 1px solid #000;
     box-shadow: none;
     -webkit-appearance: none;
+
+    font-family: 'New Walt Disney Font', sans-serif;
+    // font-size: larger;
 }
 
 .searchBox {
   padding-top: 90px;
+  font-family: 'New Walt Disney Font', sans-serif;
 }
 
 input:focus {

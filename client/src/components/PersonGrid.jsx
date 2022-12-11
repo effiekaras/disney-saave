@@ -11,6 +11,8 @@ const PersonGridWrapper = styled.div`
 
     text-align: center;
     justify-items: center;
+    font-family: 'New Walt Disney Font', sans-serif;
+    font-size: larger;
 
     width: 80%;
     margin: auto;
@@ -18,7 +20,6 @@ const PersonGridWrapper = styled.div`
 `
 
 export const PersonGrid = ({ people }) => {
-
 
     if (people.length === 0) {
         return <h1>No people!</h1>

@@ -12,6 +12,8 @@ const PersonCardWrapper = styled.div`
     padding: 2em;
     background: #f2f2f2;  // change to white later
     word-wrap: break-word;
+    font-family: 'New Walt Disney Font', sans-serif;
+    font-size: 20px;
 
     .following {
         background: #50C878;

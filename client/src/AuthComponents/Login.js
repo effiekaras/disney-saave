@@ -54,7 +54,9 @@ function Login(props) {
         let nuser = '/profile/'
         nuser += username
 
-        navigate(nuser)
+        if (isLoggedIn === username) {
+            navigate(nuser)
+        }
     }
 
     const nav = (e) => {
