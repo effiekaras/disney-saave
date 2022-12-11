@@ -47,7 +47,7 @@ function EditProfile() {
                 <div className="user-details">
                     <form onSubmit={handleSubmit}>
                         <label>Name: <input type="text" onChange={handleNameChange}/></label>
-                        <br />
+                        <br /><br />
                         <label>Biography: <input type="text" onChange={handleBioChange}/></label>
                         <br /><br />
                         <button type="submit" class="btn btn-primary">Submit</button>

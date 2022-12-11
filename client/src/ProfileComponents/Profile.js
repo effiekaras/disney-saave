@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import {useParams, Link} from 'react-router-dom';
 import axios from 'axios';
 import './Profile.scss';
-import defaultAvatar from './avatars/grayavatar.png';
+import GetAvatar from './GetAvatar.js';
 import settingsIcon from './avatars/settingsicon.png';
 import Button from 'react-bootstrap/Button';
 import Carousel from './Carousel.js';
@@ -17,6 +17,7 @@ function Profile() {
         console.log(username);
         axios.get(`${apiUrl}/users/${username}`).then(response => {
             setUser(response.data.data[0]);
+
         });
     }, [username]);
     return (
@@ -24,7 +25,7 @@ function Profile() {
             <div className="spacing"></div>
             <div className="user">
                 <div className="user-snapshot">
-                    <img className="profile-pic" src={defaultAvatar} alt="default gray avatar"/>
+                    <img className="profile-pic" src={user && GetAvatar[user.avatar]} alt="default gray avatar"/>
                     <br /><br />
                     <Link to={`/editprofile/${username}`}>
                         <Button variant="primary">EDIT</Button>
@@ -46,8 +47,8 @@ function Profile() {
                     <h2>Favorites:</h2>
                     <Carousel list_id={user && user.lists[0]}/>
                     <h2>Custom Lists:</h2>
-                    {user && user.lists.map(list_id => (
-                        list_id > 0 && <Carousel list_id={list_id} key={list_id}/>
+                    {user && user.lists.slice(1).map(list_id => (
+                        <Carousel list_id={list_id} key={list_id}/>
                     ))}
                 </div>
             </div>
