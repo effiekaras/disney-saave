@@ -90,7 +90,7 @@ function Gallery() {
                )
             }
           )
-          setFilteredData(searchedData);
+          setFilteredData([...new Set(searchedData)]);
         } else {
         if (button === '28') {
           const filter = data.filter(
@@ -100,8 +100,8 @@ function Gallery() {
               )
             }
           )
-          setFilteredData(filter);
-          setButtonData(filter);
+          setFilteredData([...new Set(filter)]);
+          setButtonData([...new Set(filter)]);
           setGenre("action ")
         } else if (button == '12') {
           const filter = data.filter(
@@ -111,8 +111,8 @@ function Gallery() {
               )
             }
           )
-          setFilteredData(filter);
-          setButtonData(filter);
+          setFilteredData([...new Set(filter)]);
+          setButtonData([...new Set(filter)]);
           setGenre("adventure ")
         } else if (button == '80') {
           const filter = data.filter(
@@ -122,8 +122,8 @@ function Gallery() {
               )
             }
           )
-          setFilteredData(filter);
-          setButtonData(filter);
+          setFilteredData([...new Set(filter)]);
+          setButtonData([...new Set(filter)]);
           setGenre("crime ")
         }
         else if (button == '35') {
@@ -134,8 +134,8 @@ function Gallery() {
               )
             }
           )
-          setFilteredData(filter);
-          setButtonData(filter);
+          setFilteredData([...new Set(filter)]);
+          setButtonData([...new Set(filter)]);
           setGenre("comedy ")
         }  else if (button == '18') {
           const filter = data.filter(
@@ -145,8 +145,8 @@ function Gallery() {
               )
             }
           )
-          setFilteredData(filter);
-          setButtonData(filter);
+          setFilteredData([...new Set(filter)]);
+          setButtonData([...new Set(filter)]);
           setGenre("drama ")
         }  else if (button == '14') {
           const filter = data.filter(
@@ -156,8 +156,8 @@ function Gallery() {
               )
             }
           )
-          setFilteredData(filter);
-          setButtonData(filter);
+          setFilteredData([...new Set(filter)]);
+          setButtonData([...new Set(filter)]);
           setGenre("fantasy ");
         }  else if (button == '9648') {
           const filter = data.filter(
@@ -167,8 +167,8 @@ function Gallery() {
               )
             }
           )
-          setFilteredData(filter);
-          setButtonData(filter);
+          setFilteredData([...new Set(filter)]);
+          setButtonData([...new Set(filter)]);
           setGenre("mystery ");
         }  else if (button == '10749') {
           const filter = data.filter(
@@ -178,13 +178,13 @@ function Gallery() {
               )
             }
           )
-          setFilteredData(filter);
-          setButtonData(filter);
+          setFilteredData([...new Set(filter)]);
+          setButtonData([...new Set(filter)]);
           setGenre("romance ");
         }
         else {
-            setFilteredData(movies);
-            setButtonData(movies);
+          setFilteredData([...new Set(movies)]);
+          setButtonData([...new Set(movies)]);
             setGenre("")
         } }
       }, [searchInput, button]);
