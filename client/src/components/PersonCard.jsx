@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 
 import styled from 'styled-components';
 import defaultAvatar from '../ProfileComponents/avatars/grayavatar.png';
+import {isLoggedIn} from "../AuthComponents/Login.js"; 
+import Login from "../AuthComponents/Login.js"; 
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const PersonCardWrapper = styled.div`
     display: inline-grid;
@@ -48,14 +51,47 @@ const PersonCardWrapper = styled.div`
 const FollowButton = () => {
 
     const [following, setFollowing] = useState(false);
+    const [toFollow, setToFollow] = useState('');
+    const [whoIAm, setWhoIAm] = useState(Login.username);
+    const navigate = useNavigate();
+    
+    const asyncPostCall = async () => {
+        console.log(whoIAm);
+        try {
+            const response = await fetch(`http://localhost:4000/api/users/${whoIAm}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+              },
+
+            body: JSON.stringify({
+                "Following":  toFollow
+            })
+           });
+        } catch(error) {
+            console.log(error);
+        }
+    }
 
     const handleClick = () => {
+        //setLogIn()s
+        //console.log(isLoggedIn);
         // First, change text
-        setFollowing(!following)
+        console.log(whoIAm);
+        if(!isLoggedIn) {
+            
+            navigate('/login');
+        }
+        if (!following) { //i want to follow somone
+          //  setToFollow(username);
+        }
+        setFollowing(!following);
+        asyncPostCall();
 
         // Then, actually follow the user by making an API request
         // TODO
     }
+
 
     return (
         <button
@@ -63,8 +99,9 @@ const FollowButton = () => {
             className={following ? 'following' : 'unfollowing'}
         >{ following ? 'Followed' : 'Follow'}</button>
     )
-
 }
+
+
 
 export const PersonCard = ({ username, email, avatar }) => {
 

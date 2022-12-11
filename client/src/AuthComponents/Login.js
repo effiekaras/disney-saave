@@ -4,10 +4,11 @@ import axios from 'axios';
 import './Login.scss';
 import { Navigate, useNavigate } from 'react-router-dom';
 
+export var isLoggedIn = false;
 function Login(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    var isLoggedIn = false;
+   
 
     const navigate = useNavigate();
 
