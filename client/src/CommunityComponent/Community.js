@@ -32,7 +32,7 @@ function Community() {
     return (
         <div>
             <h1 className='page-title'>Meet new people!</h1>
-            <input type="text" className='search-bar' onChange={(e) => setQuery(e.target.value)} placeholder={'Search...'}/>
+            <input type="text" className='search-bar' onChange={(e) => setQuery(e.target.value)} placeholder={'search...'}/>
             <PersonGrid people={!query ? people : matches} />
         </div>
     )

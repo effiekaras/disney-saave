@@ -9,7 +9,7 @@ import Login from './AuthComponents/Login.js';
 import Register from './AuthComponents/Register.js';
 import './App.scss';
 import { PersonDetail } from './components/PersonDetail.jsx';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 window.onscroll = function() {scrollFunction()};
 function scrollFunction() {
@@ -28,15 +28,16 @@ function scrollFunction() {
     document.getElementsByClassName("a")[1].style.fontSize = "25px";
     document.getElementsByClassName("a")[2].style.fontSize = "25px";
     document.getElementsByClassName("a")[3].style.fontSize = "25px";
+}
+}
 
-}
-}
+
 
 function App() {
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <div className="App">
-        <nav className="navbar fixed-top">
+        <nav className="navbar fixed-top" id="myNav">
           <div className="app-title">
             <h1 id="title">Disney Fans</h1>
           </div>
