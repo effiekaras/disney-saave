@@ -16,6 +16,10 @@ function Register(props) {
 
     const asyncPostCall = async () => {
         try {
+            var userid = "";
+            if (user.length === 0 || em.length === 0 || na.length === 0 || pass.length === 0) {
+                throw "Missing Required Fields";
+            }
             const response = await fetch('http://localhost:4000/api/users', {
              method: 'POST',
              headers: {
@@ -32,26 +36,10 @@ function Register(props) {
             const data = await response.json();
             console.log(data);
 
-           } catch(error) {
-              console.log(error);
+            } catch(error) {
+                console.log(error);
+                alert(error);
         }
-
-        const element = document.querySelector('#put-request-set-headers .date-updated');
-        const requestOptions = {
-            method: 'PUT',
-            headers: { 
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer my-token',
-                'My-Custom-Header': 'foobar'
-            },
-            body: JSON.stringify({ following: [] })
-        };
-
-        var nlink = 'http://localhost:4000/api/users/';
-        nlink += user;
-        fetch(nlink, requestOptions)
-        .then(response => response.json())
-        .then(data => element.innerHTML = data.updatedAt);
     }
 
     const handleSubmit = (e) => {
