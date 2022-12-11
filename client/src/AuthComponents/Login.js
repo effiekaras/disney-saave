@@ -5,36 +5,55 @@ import './Login.scss';
 import { Navigate, useNavigate  } from 'react-router-dom';
 
 function Login(props) {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [currentForm, setCurrentForm] = useState('login');
-    let user = [];
+    let isLoggedIn = false;
 
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(email);
+        console.log(username);
 
-        fetch('http://localhost:4000/api/users', {
-            body: {"email": email, "password": password}
+        var nlink = 'http://localhost:4000/api/users/';
+        nlink += username;
+
+        fetch(nlink)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('data')
+            console.log(data)
+
+            if (data.message === 'User not Found') {
+                console.log('user not found')
+                alert('Username not found')
+            }
             
-        }).then((data) => {
-            user = data.clone().json();
-            console.log(data.clone().json());
-            console.log(data.status);
-            // return data.json();
-        })
+            try {
+                let parsed = JSON.parse(JSON.stringify(data));
 
-        if (currentForm === 'login') {
-            navigate('/register');
-        }
+                console.log(parsed.data[0].name)
+                console.log(parsed.data[0].password)
+
+                if (parsed.data[0].name === username && parsed.data[0].password === password) {
+                    console.log('correct login info')
+                    alert('Successfully logged in!')
+                    isLoggedIn = true
+                } else {
+                    console.log('incorrect login info')
+                    alert('Invalid password')
+                }
+
+            } catch (err) {
+                console.log('Error: ', err.message)
+            }
+        })
     }
 
-    
-
-    console.log(user);
-    console.log("hi");
+    const nav = (e) => {
+        e.preventDefault();
+        navigate('/register');
+    }
 
 
     return (
@@ -42,8 +61,8 @@ function Login(props) {
             <h1>Login:</h1>
             <form className="login-form" onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="email">Email:</label>
-                    <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="yourEmail@gmail.com" id="email" name="email" />
+                    <label htmlFor="username">Username:</label>
+                    <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="your username" id="username" name="username" />
                 </div>
                 <div>
                     <label htmlFor="password">Password:</label>
@@ -56,7 +75,7 @@ function Login(props) {
                 {/* <button className="link" onClick={() => props.onFormSwitch('register')}>Don't have an account? Register here.</button> */}
                 
             </form>
-            <button className="link" onClick={navigate('/register')}>Don't have an account? Register here.</button>
+            <button className="link" onClick={nav}>Don't have an account? Register here.</button>
             
             
         </div>
@@ -64,3 +83,9 @@ function Login(props) {
 }
 
 export default Login;
+
+// TODO:
+// about page
+// get alert for Register
+// put in favorites list
+// alert for invalid username

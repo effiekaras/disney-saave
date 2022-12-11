@@ -21,50 +21,41 @@ function Register(props) {
              headers: {
                'Content-Type': 'application/json'
                },
-               body: JSON.stringify({
-         // your expected POST request payload goes here
-                 username: user,
-                 email: em,
-                 name: na,
-                 password: pass
-                })
-             });
-             const data = await response.json();
-             console.log(data);
 
-             if (data.status === 500) {
-                console.log("user already exists");
-             }
+            body: JSON.stringify({
+                username: user,
+                email: em,
+                name: na,
+                password: pass
+            })
+            });
+            const data = await response.json();
+            console.log(data);
 
            } catch(error) {
-               
-              console.log(error)
-             } 
+              console.log(error);
         }
+
+        const element = document.querySelector('#put-request-set-headers .date-updated');
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer my-token',
+                'My-Custom-Header': 'foobar'
+            },
+            body: JSON.stringify({ following: [] })
+        };
+
+        var nlink = 'http://localhost:4000/api/users/';
+        nlink += user;
+        fetch(nlink, requestOptions)
+        .then(response => response.json())
+        .then(data => element.innerHTML = data.updatedAt);
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(email);
-        console.log(user);
-        console.log(typeof user);
-
-        // fetch('http://localhost:4000/api/users', {
-        //     method: 'POST',
-        //     body: JSON.stringify({
-        //         "username": user, 
-        //         "name": na, 
-        //         "email": em, 
-        //         "password": pass})
-        // })
-        // .then((data) => {
-        //     console.log(data.status)
-        //     console.log(data.data)
-
-        //     if (data.status === 500) {
-        //         console.log("user already exists")
-        //     }
-        // })
-        
         asyncPostCall();
 
         navigate('/login');
@@ -97,7 +88,7 @@ function Register(props) {
                         <input value={pass} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="*******" id="password" name="password" /> 
                     </div>
 
-                    <button type="submit">Log In</button>
+                    <button type="submit">Sign Up</button>
                     
                 </form>
                 {/* <button className="link" onClick={() => props.onFormSwitch('login')}>Already have an account? Log in here.</button> */}
