@@ -4,6 +4,7 @@ import {useParams, Link} from 'react-router-dom';
 import axios from 'axios';
 import './Profile.scss';
 import defaultAvatar from './avatars/grayavatar.png';
+import settingsIcon from './avatars/settingsicon.png';
 import Button from 'react-bootstrap/Button';
 import Carousel from './Carousel.js';
 
@@ -13,6 +14,7 @@ function Profile() {
     const {username} = useParams();
     const [user, setUser] = useState(null);
     useEffect(() => {
+        console.log(username);
         axios.get(`${apiUrl}/users/${username}`).then(response => {
             setUser(response.data.data[0]);
         });
@@ -24,13 +26,20 @@ function Profile() {
                 <div className="user-snapshot">
                     <img className="profile-pic" src={defaultAvatar} alt="default gray avatar"/>
                     <br /><br />
-                    <Button variant="primary">FOLLOW</Button>
+                    <Link to={`/editprofile/${username}`}>
+                        <Button variant="primary">EDIT</Button>
+                    </Link>
                     <br /><br />
                     <p>Followers: {user && user.followers && user.followers.length}</p>
                     <p>Following: {user && user.following && user.following.length}</p>
                 </div>
                 <div className="user-details">
-                    <h1>{user && user.name}</h1>
+                    <div className="name-and-settings">
+                        <h1>{user && user.name}</h1>
+                        <Link to={`/editsettings/${username}`}>
+                            <img src={settingsIcon} />
+                        </Link>
+                    </div>
                     <br />
                     <h2>Biography:</h2>
                     <p>{user && user.bio}</p>
@@ -38,7 +47,7 @@ function Profile() {
                     <Carousel list_id={user && user.lists[0]}/>
                     <h2>Custom Lists:</h2>
                     {user && user.lists.map(list_id => (
-                        <Carousel list_id={list_id} key={list_id}/>
+                        list_id > 0 && <Carousel list_id={list_id} key={list_id}/>
                     ))}
                 </div>
             </div>

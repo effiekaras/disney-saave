@@ -3,6 +3,8 @@ import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import About from './AboutComponent/About.js';
 import Detail from './DetailComponent/Detail.js';
 import Profile from './ProfileComponents/Profile.js';
+import EditProfile from './ProfileComponents/EditProfile.js';
+import EditSettings from './ProfileComponents/EditSettings.js';
 import Community from './CommunityComponent/Community.js';
 import Gallery from './GalleryComponent/Gallery.js';
 import Login from './AuthComponents/Login.js';
@@ -58,9 +60,10 @@ function App() {
         </nav>
         <Routes>
           <Route path="/detail/:id" element={<Detail />}/>
-          <Route path="/profile/:id" element={<Profile />}/>
           <Route path="/user/:username" element={<PersonDetail />}/>
           <Route path="/profile/:username" element={<Profile />}/>
+          <Route path="/editprofile/:username" element={<EditProfile />}/>
+          <Route path="/editsettings/:username" element={<EditSettings />}/>
           <Route path="/community" element={<Community />}/>
           <Route path="/gallery" element={<Gallery />}/>
           <Route path="/login" element={<Login />}/>
