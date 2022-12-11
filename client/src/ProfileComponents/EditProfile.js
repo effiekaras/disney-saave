@@ -3,9 +3,8 @@ import {useParams, Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import './Profile.scss';
 import './EditProfile.scss';
-import GetAvatar from './GetAvatar.js'
-
-let apiUrl = "http://localhost:4000/api";
+import GetAvatar from './GetAvatar.js';
+import {API_URL} from '../constants';
 
 function EditProfile() {
     const {username} = useParams();
@@ -13,10 +12,13 @@ function EditProfile() {
     const [name, setName] = useState("");
     const [bio, setBio] = useState("");
     const [avatar, setAvatar] = useState("");
+    const whoIAm = localStorage.getItem("username") || "";
     const navigate = useNavigate();
     useEffect(() => {
-        console.log(username);
-        axios.get(`${apiUrl}/users/${username}`).then(response => {
+        if (whoIAm !== username) {
+            navigate(`/user/${username}`, {replace: true});
+        }
+        axios.get(`${API_URL}/users/${username}`).then(response => {
             setUser(response.data.data[0]);
             setAvatar(response.data.data[0].avatar)
         });
@@ -35,7 +37,7 @@ function EditProfile() {
             new_data.bio = bio;
         if (avatar)
             new_data.avatar = avatar;
-        axios.put(`${apiUrl}/users/${username}`, new_data).then(response => {
+        axios.put(`${API_URL}/users/${username}`, new_data).then(response => {
             console.log(response);
         });
         navigate(`/profile/${username}`, {replace: true});

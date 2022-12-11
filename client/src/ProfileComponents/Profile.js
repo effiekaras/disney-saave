@@ -1,6 +1,6 @@
 
 import React, {useState, useEffect} from 'react';
-import {useParams, Link} from 'react-router-dom';
+import {useParams, Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import './Profile.scss';
 import GetAvatar from './GetAvatar.js';
@@ -12,8 +12,12 @@ import { API_URL } from '../constants';
 function Profile() {
     const {username} = useParams();
     const [user, setUser] = useState(null);
+    const navigate = useNavigate();
+    const whoIAm = localStorage.getItem("username") || "";
     useEffect(() => {
-        console.log(username);
+        if (whoIAm !== username) {
+            navigate(`/user/${username}`, {replace: true});
+        }
         axios.get(`${API_URL}/users/${username}`).then(response => {
             setUser(response.data.data[0]);
 

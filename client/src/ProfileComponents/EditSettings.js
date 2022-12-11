@@ -3,8 +3,7 @@ import {useParams, Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import './Profile.scss';
 import GetAvatar from './GetAvatar.js';
-
-let apiUrl = "http://localhost:4000/api";
+import {API_URL} from '../constants';
 
 function EditSettings() {
     const {username} = useParams();
@@ -12,10 +11,13 @@ function EditSettings() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirm_password, setConfirmPassword] = useState("");
+    const whoIAm = localStorage.getItem("username") || "";
     const navigate = useNavigate();
     useEffect(() => {
-        console.log(username);
-        axios.get(`${apiUrl}/users/${username}`).then(response => {
+        if (whoIAm !== username) {
+            navigate(`/user/${username}`, {replace: true});
+        }
+        axios.get(`${API_URL}/users/${username}`).then(response => {
             setUser(response.data.data[0]);
         });
     }, [username]);
@@ -34,7 +36,7 @@ function EditSettings() {
             new_data.email = email;
         if (password && password === confirm_password)
             new_data.password = password;
-        axios.put(`${apiUrl}/users/${username}`, new_data).then(response => {
+        axios.put(`${API_URL}/users/${username}`, new_data).then(response => {
             console.log(response);
         });
         navigate(`/profile/${username}`, {replace: true});
