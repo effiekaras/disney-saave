@@ -7,7 +7,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 function Login(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    let isLoggedIn = false;
+    var isLoggedIn = false;
 
     const navigate = useNavigate();
 
@@ -50,6 +50,11 @@ function Login(props) {
                 console.log('Error: ', err.message)
             }
         })
+
+        let nuser = '/profile/'
+        nuser += username
+
+        navigate(nuser)
     }
 
     const nav = (e) => {
