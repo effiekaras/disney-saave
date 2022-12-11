@@ -4,6 +4,9 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import defaultAvatar from '../ProfileComponents/avatars/grayavatar.png';
 
+import { FollowButton } from './PersonCard';
+import { API_URL } from '../constants';
+
 const PersonDetailWrapper = styled.div`
     text-align: center;
     width: 75%;
@@ -59,26 +62,26 @@ const PersonDetailWrapper = styled.div`
 `
 
 
-const FollowButton = () => {
+// const FollowButton = () => {
 
-    const [following, setFollowing] = useState(false);
+//     const [following, setFollowing] = useState(false);
 
-    const handleClick = () => {
-        // First, change text
-        setFollowing(!following)
+//     const handleClick = () => {
+//         // First, change text
+//         setFollowing(!following)
 
-        // Then, actually follow the user by making an API request
-        // TODO
-    }
+//         // Then, actually follow the user by making an API request
+//         // TODO
+//     }
 
-    return (
-        <button
-            onClick={() => handleClick()}
-            className={following ? 'following' : 'unfollowing'}
-        >{ following ? 'Followed' : 'Follow'}</button>
-    )
+//     return (
+//         <button
+//             onClick={() => handleClick()}
+//             className={following ? 'following' : 'unfollowing'}
+//         >{ following ? 'Followed' : 'Follow'}</button>
+//     )
 
-}
+// }
 
 export const PersonDetail = () => {
     const [info, setInfo] = useState({});
@@ -86,7 +89,7 @@ export const PersonDetail = () => {
 
     useEffect(() => {
         // Make API call to get people
-        fetch(`http://localhost:4000/api/users/${username}`).then((data) => {
+        fetch(`${API_URL}/users/${username}`).then((data) => {
             return data.json();
         }).then((json) => {
             console.log(json.data);
@@ -102,8 +105,6 @@ export const PersonDetail = () => {
         </div>
     )
     }
-
-    console.log(info);
 
     return (
         <PersonDetailWrapper>
@@ -124,7 +125,7 @@ export const PersonDetail = () => {
                     {/* placeholder bio lol, remove */}
                     { info.bio !== "" ? info.bio : "I am a student at UIUC. #seniors"  }
                 </h3>
-                <FollowButton />
+                <FollowButton username={info.username} />
             </div>
         </PersonDetailWrapper>
     )

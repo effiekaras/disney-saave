@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 import defaultAvatar from '../ProfileComponents/avatars/grayavatar.png';
 import {isLoggedIn} from "../AuthComponents/Login.js"; 
 import Login from "../AuthComponents/Login.js"; 
 import { Navigate, useNavigate } from 'react-router-dom';
+import { API_URL } from '../constants';
 
 const PersonCardWrapper = styled.div`
     display: inline-grid;
@@ -54,24 +55,35 @@ const PersonCardWrapper = styled.div`
     }
 `
 
-const FollowButton = () => {
+export const FollowButton = ({ username }) => {
 
     const [following, setFollowing] = useState(false);
-    const [toFollow, setToFollow] = useState('');
-    const [whoIAm, setWhoIAm] = useState(Login.username);
+    //const [whoIAm, setWhoIAm] = useState(Login.username);
+    const whoIAm = localStorage.getItem('username') || '';
     const navigate = useNavigate();
     
-    const asyncPostCall = async () => {
+    useEffect(() => {
+        // Get user data for current auth'd user
+        fetch(`${API_URL}/users/${whoIAm}`).then((data) => {
+            return data.json();
+        }).then((json) => {
+            // Check JSON list of following users
+            console.log(json.data[0].following);
+            setFollowing(json.data[0].following?.includes(username));
+        })
+    }, []);
+
+    const followRequest = async () => {
         console.log(whoIAm);
         try {
-            const response = await fetch(`http://localhost:4000/api/users/${whoIAm}`, {
+            await fetch(`${API_URL}/users/${whoIAm}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json'
               },
 
             body: JSON.stringify({
-                "Following":  toFollow
+                "following":  username
             })
            });
         } catch(error) {
@@ -79,23 +91,39 @@ const FollowButton = () => {
         }
     }
 
+    const unfollowRequest = async () => {
+        try {
+            await fetch(`${API_URL}/users/${whoIAm}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+
+                body: JSON.stringify({
+                    "unfollowing": username
+                })
+            })
+        } catch(err) {
+            console.log(err);
+        }
+    };
+
     const handleClick = () => {
         //setLogIn()s
         //console.log(isLoggedIn);
         // First, change text
         console.log(whoIAm);
-        if(!isLoggedIn) {
-            
+        if(!localStorage.getItem('username')) {
             navigate('/login');
         }
-        if (!following) { //i want to follow somone
-          //  setToFollow(username);
-        }
-        setFollowing(!following);
-        asyncPostCall();
 
-        // Then, actually follow the user by making an API request
-        // TODO
+        if (!following) { //i want to follow somone
+            followRequest();
+            setFollowing(true);
+        } else {
+            unfollowRequest();
+            setFollowing(false);
+        }
     }
 
 
@@ -127,7 +155,7 @@ export const PersonCard = ({ username, email, avatar }) => {
                         { email }
                     </div>
                 </h3>
-                <FollowButton />
+                <FollowButton username={username} />
             </div>
         </PersonCardWrapper>
     )

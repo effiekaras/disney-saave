@@ -7,15 +7,14 @@ import defaultAvatar from './avatars/grayavatar.png';
 import settingsIcon from './avatars/settingsicon.png';
 import Button from 'react-bootstrap/Button';
 import Carousel from './Carousel.js';
-
-let apiUrl = "http://localhost:4000/api";
+import { API_URL } from '../constants';
 
 function Profile() {
     const {username} = useParams();
     const [user, setUser] = useState(null);
     useEffect(() => {
         console.log(username);
-        axios.get(`${apiUrl}/users/${username}`).then(response => {
+        axios.get(`${API_URL}/users/${username}`).then(response => {
             setUser(response.data.data[0]);
         });
     }, [username]);
