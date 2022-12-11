@@ -40,9 +40,11 @@ function Login(props) {
 
                 if (parsed.data[0].username === username && parsed.data[0].password === password) {
                     console.log('correct login info')
-                    alert('Successfully logged in!')
                     isLoggedIn = username
                     localStorage.setItem('username', username)
+                    let nuser = '/profile/'
+                    nuser += username
+                    navigate(nuser)                    
                 } else {
                     console.log('incorrect login info')
                     alert('Invalid password')
@@ -54,13 +56,6 @@ function Login(props) {
                 console.log('Error: ', err.message)
             }
         })
-
-        let nuser = '/profile/'
-        nuser += username
-
-        if (isLoggedIn === username) {
-            navigate(nuser)
-        }
     }
 
     const nav = (e) => {
@@ -96,8 +91,3 @@ function Login(props) {
 }
 
 export default Login;
-
-// TODO:
-// about page
-// get alert for Register
-// put in favorites list

@@ -32,6 +32,7 @@ const PersonCardWrapper = styled.div`
     button {
         width: 90px;
         margin: 30px;
+        font-size: 16px;
     }
     .usernameprop {
         font-size: 1.5vw;
