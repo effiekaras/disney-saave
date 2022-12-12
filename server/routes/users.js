@@ -9,6 +9,8 @@ module.exports = function (router) {
     var userRoute = router.route("/users");
 
     var specRoute = router.route("/users/:username");
+
+    var favsRoute = router.route("/users/:username/favorites");
     
     userRoute.get(async function (req, res) {
         var where = req.query.where;
@@ -207,6 +209,21 @@ module.exports = function (router) {
         await User.remove();
         res.status(200);
         res.json({message: "All users deleted"});
+    });
+
+    favsRoute.get(async function (req, res) {
+        // Get User object
+        var user = await User.find({username: req.params.username.toString()});
+        // Grab this user's favorites list
+        var favsList = await List.find({ owner: user._id, name: "Favorites" })
+        // If this list does not exist, then create it
+        if (!favsList) {
+            favsList = new List({name: "Favorites", owner: user._id, items: []});
+            await favsList.save();
+        }
+        // Now that we have a list that exists, return it.
+        return res.json({message: "List created", data: favsList});
+
     });
     
 

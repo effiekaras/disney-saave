@@ -63,6 +63,13 @@ module.exports = function (router) {
             items.push(req.body.items);
         } 
 
+        if (typeof(owner) === 'string') {
+            // If we're passing a string into the owner param,
+            // grab the ObjectId
+            const user = await User.findOne({ username: owner });
+            owner = user._id;
+        }
+
         var list = new List({name: name, owner: owner, items: items});
 
         await list.save();
@@ -111,6 +118,7 @@ module.exports = function (router) {
 
         var items = list.items;
         if (req.body.item) {
+            console.log(req.body.item);
             items.push(req.body.item);
         }
 
@@ -118,6 +126,9 @@ module.exports = function (router) {
             const index = items.indexOf(req.body.deleteditem);
             items.splice(index, 1);
         }
+
+        // Get rid of duplicates, just in case.
+        items = [...new Set(items)];
 
         await List.findByIdAndUpdate(reqid, {name: name, items: items});
         var newuser = await List.findById(reqid);
