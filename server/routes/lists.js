@@ -62,22 +62,22 @@ module.exports = function (router) {
         if (req.body.items) {
             items.push(req.body.items);
         } 
-
+        /*
         if (typeof(owner) === 'string') {
             // If we're passing a string into the owner param,
             // grab the ObjectId
             const user = await User.findOne({ username: owner });
-            owner = user._id;
+            owner = user.username;
         }
-
+        */
         var list = new List({name: name, owner: owner, items: items});
 
         await list.save();
 
-        var actualowner = await User.findById(owner);
-        var ownerlist = actualowner.lists;
+        var actualowner = await User.find({username: owner});
+        var ownerlist = actualowner[0].lists;
         ownerlist.push(list._id);
-        await User.findByIdAndUpdate(owner, {lists: ownerlist});
+        await User.findByIdAndUpdate(actualowner[0]._id, {lists: ownerlist});
 
         res.status(200);
         res.json({message: "List created", data: list});
@@ -142,11 +142,11 @@ module.exports = function (router) {
         try {
             var list = await List.findById(reqid);
 
-            var actualowner = await User.findById(list.owner);
-            var ownerlist = actualowner.lists;
+            var actualowner = await User.find({username: list.owner});
+            var ownerlist = actualowner[0].lists;
             var index = ownerlist.indexOf(list._id);
             ownerlist.splice(index, 1);
-            await User.findByIdAndUpdate(list.owner, {lists: ownerlist});
+            await User.findByIdAndUpdate(actualowner[0]._id, {lists: ownerlist});
 
             await List.findByIdAndDelete(reqid);
             res.status(200);
