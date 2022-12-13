@@ -1,15 +1,17 @@
 import React, {useState, useEffect} from 'react';
-import {useParams, Link, Navigate, useNavigate} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import moment from 'moment'
 
 import axios from 'axios';
 import './Detail.scss';
+import { API_URL } from '../constants';
 
 const getImage = (path) => `https://image.tmdb.org/t/p/w342/${path}`;
 const api_key = "59dd51057d034c78c09b0129b62b2de9";
 const BASE_URL = "https://api.themoviedb.org/3";
+
 
 
 function Detail() {
@@ -25,8 +27,9 @@ function Detail() {
     const [image, setImage] = React.useState("");
     const [genre, setGenre] = React.useState([]);
     const [release, setRelease] = React.useState("");
-    const navigate = useNavigate();
-
+    const [info, setInfo] = useState({});
+    
+    const username = localStorage.getItem("username");
     function getImageFunc(path) {
         if (path) {
           return getImage(path);
@@ -37,14 +40,41 @@ function Detail() {
 
     // Used to initialize lists for testing; replace with real lists
     React.useEffect(() => {
-        var list1 = {"name": "List 1"}
-        var list2 = {"name": "List 2"}
-        var list3 = {"name": "List 3"}
-        var list4 = {"name": "List 4"}
-        //Use 5 lists to demonstrate overflow
-        var list5 = {"name": "List 5"}
+        fetch(`${API_URL}/users/${username}`).then((data) => {
+            return data.json();
+        }).then((json) => {
+            console.log(json.data);
+            // setInfo(json.data[0]);  // array with one entry (stew-pid)
+            // Get list data
+            // also nested fetch ayyy lmaoooo
+            let userLists = [];
+            for (let list of json.data[0].lists) {
+                try{
+                    fetch(`${API_URL}/lists/${list}`).then((data) => {
+                        return data.json();
+                    }).then((ll) => {
+                        userLists.push(ll.data);
+                    })
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+            setLists(userLists);
+            console.log(userLists);
 
-        setLists([list1,list2, list3, list4, list5])
+            const favoritesList = fetch(`${API_URL}/users/${json.data[0]._id}/favorites`).then((data) => {
+                return data.json();
+            }).then((json) => {
+                return json.data[0];
+            });
+            setInfo({...json.data[0], 'favoritesList': favoritesList});
+        });
+        // var list1 = {"name": "List 1"}
+        // var list2 = {"name": "List 2"}
+        // var list3 = {"name": "List 3"}
+        // var list4 = {"name": "List 4"}
+        // //Use 5 lists to demonstrate overflow
+        // var list5 = {"name": "List 5"}
     }, [])
     
 
@@ -66,19 +96,70 @@ function Detail() {
         setImage(getImageFunc(mov.poster_path));
     })}, [])
 
-    const favorite = event => {
+    const ToggleFavorite = (event, movieId) => {
         // Add logic for favoriting here
         // If already favorited, then this should be solid on load
-        window.alert("favorite")
-        event.currentTarget.classList.toggle('fa-solid');
+        // window.alert("favorite")
+        //const whoIAm = localStorage.getItem('username') || '';
+
+        // Check if this is alreday a favorite
+        const favsList = info.favoritesList;
+        console.log(info);
+        if (favsList?.items?.includes(movieId)) {
+            // This is already a favorite. Do something to remove this from the favorites
+            // list. I don't really know man.
+            event.target.classList.toggle('fa-solid');
+        }
+
+        // bada bing bada boom baybee
+        fetch(`${API_URL}/lists/${favsList._id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "item": movieId
+            })
+        })
+        console.log(event);
+        event.target.classList.toggle('fa-solid');
     }
 
-    const AddToList = (name) => {
-        window.alert(`add to ${name}`)
+    const AddToList = (listId, movieId) => {
+        // window.alert(`add to ${name}`)
+        // add da thing to da thingy (thats what she said lmfao)
+
+        fetch(`${API_URL}/lists/${listId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "item": movieId
+            })
+        })
     }
 
-    const CreateNewList = () => {
-        window.alert("create a new list")
+    const CreateNewList = async() => {
+        const whoIAm = localStorage.getItem('username') || '';
+        const nameOfList = window.prompt("create a new list")
+        
+        try {
+            await fetch(`${API_URL}/lists`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+
+                body: JSON.stringify({
+                    "name" : nameOfList,
+                    "owner" : whoIAm,
+                    "items": id
+                })
+            })
+        } catch(err) {
+            console.log(err);
+        }
     }
 
 
@@ -86,14 +167,16 @@ return (
     <section> 
     <div className="grid" id="detail">
     <div className="container">
-    <div className="modal-content">
-    <h1> {data.original_title} <i className="fa-regular fa-heart" onClick={(e)=>{favorite(e)}}></i></h1>
+    <h1> {data.original_title} <i className={`fa-regular fa-heart`} onClick={(e)=>{ToggleFavorite(e, id)}}></i></h1>
+    <div className="sideways">
     <img className="gridimg" src={getImageFunc(data.poster_path)}/>
     <p className="description">
             {overview || "No overview available."} <br></br>
             Release Date: {moment(release, 'Y/M/D').format('MMMM D, Y')} <br></br>
+            <br></br>
             Genre: {JSON.stringify(genre, null, 2).replace(/['"]+/g, '').replace(/['[]+/g, '').replace(/['\]]+/g, '') || "N/A"} 
     </p>
+    </div>
     <div className="detailButtons">
     <>
         <Button className="detailButton" onClick={toggleShow}>
@@ -105,11 +188,20 @@ return (
         <div className="modalBox">
             <span id="modalTitle">Which list would you like to add this to?</span>
             <div id="listContainer">
-            {lists.map((l) => (
-                <div id="listBox" onClick={() => AddToList(l.name)}>
+            {lists.map((l) => {
+                if (info.lists.includes(l._id)) {
+                    return (
+                        <div id="listBox" style={{pointerEvents: 'none'}} onClick={() => null}>
+                            <div className="listName">{l.name} (Added)</div>
+                        </div>
+                    )
+                }
+                return (
+                <div id="listBox" onClick={() => AddToList(l._id, id)}>
                     <div className="listName">{l.name}</div>
-                </div>    
-            ))}    
+                </div>
+            )}
+            )}    
             </div>
             <button onClick={CreateNewList} id="createList">Create a New List</button>
         </div>
@@ -122,7 +214,7 @@ return (
 
     </div>
     </div>
-    </div></div>
+    </div>
     </section>
     )
 }

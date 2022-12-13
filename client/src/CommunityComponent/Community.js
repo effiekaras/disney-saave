@@ -9,6 +9,7 @@ import { API_URL } from '../constants';
 
 
 function Community() {
+    const username = localStorage.getItem("username");
 
     // Get a list of people from the API
     const [people, setPeople] = useState([]);
@@ -20,7 +21,15 @@ function Community() {
         fetch(`${API_URL}/users`).then((data) => {
             return data.json();
         }).then((json) => {
-            setPeople(json.data);
+            var people_data = json.data;
+            const filter = people_data.filter(
+                d=> {
+                  return (
+                    (d.username) !== (username)
+                  )
+                }
+              )
+            setPeople(filter);
         })
     }, []);
 

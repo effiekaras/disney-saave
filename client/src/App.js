@@ -14,6 +14,7 @@ import { PersonDetail } from './components/PersonDetail.jsx';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 window.onscroll = function() {scrollFunction()};
+
 function scrollFunction() {
   if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
     document.getElementsByClassName("navbar")[0].style.padding = "0px";
@@ -45,7 +46,7 @@ function App() {
           </div>
           <ul className="tabs">
             <li>
-              <Link className="a" to="/">About</Link>
+              <Link className="a" id="about" to="/">About</Link>
             </li>
             <li>
               <Link className="a" to="/community">Community</Link>
