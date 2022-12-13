@@ -13,7 +13,8 @@ const api_key = "59dd51057d034c78c09b0129b62b2de9";
 const BASE_URL = "https://api.themoviedb.org/3";
 
 
-
+var favLists = [];
+var myFavsListID;
 function Detail() {
     const {id} = useParams();
     const [basicModal, setBasicModal] = useState(false);
@@ -31,6 +32,10 @@ function Detail() {
     const [release, setRelease] = React.useState("");
     const [info, setInfo] = useState({});
     const [listName, setName] = useState('');
+    const [favorite, setFavorite] = useState(false);
+    const [favListInfo, setFavListInfo] = useState([]);
+
+    
     
     const username = localStorage.getItem("username");
     function getImageFunc(path) {
@@ -64,13 +69,24 @@ function Detail() {
             }
             setLists(userLists);
             console.log(userLists);
+        
 
-            const favoritesList = fetch(`${API_URL}/users/${json.data[0]._id}/favorites`).then((data) => {
+            console.log(json.data[0].lists[0]);
+            myFavsListID = json.data[0].lists[0];
+
+            fetch(`${API_URL}/lists/${json.data[0].lists[0]}`).then((data) => {
                 return data.json();
             }).then((json) => {
-                return json.data[0];
-            });
-            setInfo({...json.data[0], 'favoritesList': favoritesList});
+                //console.log(json.data);
+                setFavListInfo(json.data.items);
+                //console.log(favListInfo);
+                favLists= json.data.items;
+                
+                //console.log(favLists);
+            })
+            favLists= json.data.items;
+            
+            
         });
         // var list1 = {"name": "List 1"}
         // var list2 = {"name": "List 2"}
@@ -79,9 +95,8 @@ function Detail() {
         // //Use 5 lists to demonstrate overflow
         // var list5 = {"name": "List 5"}
     }, [])
+
     
-
-
     React.useEffect(() => {
         var link = `movie/${id}?api_key=${api_key}&language=en-US`;
         const movie = api.get(link);
@@ -106,26 +121,85 @@ function Detail() {
         //const whoIAm = localStorage.getItem('username') || '';
 
         // Check if this is alreday a favorite
-        const favsList = info.favoritesList;
-        console.log(info);
-        if (favsList?.items?.includes(movieId)) {
+        //const myFavsListID = info.lists[0];
+        // console.log(favsList)
+        // fetch(`${API_URL}/lists/${favsList}`).then((data) => {
+        //     return data.json();
+        // }).then((json) => {
+            
+            
+        //     setFavListInfo(json.data[0]);
+        // });
+        
+        // useEffect(() => {
+        //     // Make API call to get people
+        //     fetch(`${API_URL}/lists/${favsList}`).then((data) => {
+        //         return data.json();
+        //     }).then((json) => {
+        //         console.log(json.data);
+        //         setFavListInfo(json.data[0]); // array with one entry (stew-pid)
+        //     })
+        // }, []);
+        
+        //console.log(favListInfo);
+        // fetch(`${API_URL}/users/${username}`).then((data) => {
+        //     return data.json();
+        // }).then((json) => {
+        //     let parsed = JSON.parse(JSON.stringify(data));
+        //     console.log(parsed);
+        //     myFavsListID = parsed.data[0].lists[0];
+        //     console.log(myFavsListID)
+        fetch(`${API_URL}/lists/${myFavsListID}`).then((data) => {
+            return data.json();
+        }).then((json) => {
+            //console.log(json.data.items);
+            setFavListInfo(json.data.items);
+            //console.log(favListInfo);
+            favLists= json.data.items;
+            //console.log(favLists);
+        })
+        //     // favLists= json.data.items;
+
+
+        console.log(favLists)
+            
+        // });
+        var MyFavsList = favLists
+        if (MyFavsList?.includes(movieId)) {
+            //console.log("im here!")
             // This is already a favorite. Do something to remove this from the favorites
             // list. I don't really know man.
-            event.target.classList.toggle('fa-solid');
+            setFavorite(false);
+            document.getElementById("heart").className = "fa-regular fa-heart";
+           // event.target.classList.toggle('fa-solid');
+            fetch(`${API_URL}/lists/${myFavsListID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "deleteditem": movieId
+                })
+            })
+        } else {
+            setFavorite(true);
+            document.getElementById("heart").className = "fa-solid fa-heart";
+            fetch(`${API_URL}/lists/${myFavsListID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "item": movieId
+                })
+            })
         }
 
         // bada bing bada boom baybee
-        fetch(`${API_URL}/lists/${favsList._id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "item": movieId
-            })
-        })
-        console.log(event);
-        event.target.classList.toggle('fa-solid');
+        
+    
+       
+        // event.target.classList.toggle('fa-solid');
     }
 
     const AddToList = (listId, movieId) => {
@@ -171,13 +245,26 @@ function Detail() {
         }
         
     }
+    const checkFav = (movieId) => {
+        // console.log(info.lists[0]);
+        // const favsList = info.lists[0];
+        // console.log(favsList);
+        if (favLists?.includes(movieId)) {
+            console.log("im here!")
+            setFavorite(true);
+            // This is already a favorite. Do something to remove this from the favorites
+            // list. I don't really know man.
+           
+            //event.target.classList.toggle('fa-solid');
+        }
+    }
 
 
 return (
     <section> 
     <div className="grid" id="detail">
     <div className="container">
-    <h1> {data.original_title} <i className={`fa-regular fa-heart`} onClick={(e)=>{ToggleFavorite(e, id)}}></i></h1>
+    <h1> {data.original_title} <i id = "heart" className={favLists?.includes(id) ? 'fa-heart fa-solid' : 'fa-regular fa-heart'} onClick={(e)=>{ToggleFavorite(e, id)}}></i></h1>
     <div className="sideways">
     <img className="gridimg" src={getImageFunc(data.poster_path)}/>
     <p className="description">
