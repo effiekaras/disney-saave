@@ -25,14 +25,6 @@ const PersonDetailWrapper = styled.div`
         background: none;
     }
 
-    button {
-        width: 150px;
-        height: auto;
-        padding: 0.5em;
-        margin-top: 5px;
-        font-size: 1.5vw;
-    }
-
     .info-grid{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
