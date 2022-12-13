@@ -11,6 +11,8 @@ function EditSettings() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirm_password, setConfirmPassword] = useState("");
+    const [name, setName] = useState("");
+    const [bio, setBio] = useState("");
     const whoIAm = localStorage.getItem("username") || "";
     const navigate = useNavigate();
     useEffect(() => {
@@ -21,6 +23,7 @@ function EditSettings() {
             setUser(response.data.data[0]);
         });
     }, [username]);
+
     const handleEmailChange = event => {
         setEmail(event.target.value);
     };
@@ -30,12 +33,23 @@ function EditSettings() {
     const handleConfirmPasswordChange = event => {
         setConfirmPassword(event.target.value);
     };
+    const handleNameChange = event => {
+        setName(event.target.value);
+    };
+    const handleBioChange = event => {
+        setBio(event.target.value);
+    };
+
     const handleSubmit = event => {
         let new_data = {}
         if (email)
             new_data.email = email;
         if (password && password === confirm_password)
             new_data.password = password;
+        if (name)
+            new_data.name = name;
+        if (bio)
+            new_data.bio = bio;
         axios.put(`${API_URL}/users/${username}`, new_data).then(response => {
             console.log(response);
         });
@@ -50,11 +64,15 @@ function EditSettings() {
                 </div>
                 <div className="user-details">
                     <form onSubmit={handleSubmit}>
-                        <label>Email: <input type="text" onChange={handleEmailChange}/></label>
-                        <br />
+                    <label>Name: <input type="text" onChange={handleNameChange}/></label>
+                        <br /><br />
                         <label>Password: <input type="text" onChange={handlePasswordChange}/></label>
                         <br />
                         <label>Confirm Password: <input type="text" onChange={handleConfirmPasswordChange}/></label>
+                        <br /><br />
+                        <label>Email: <input type="text" onChange={handleEmailChange}/></label>
+                        <br />
+                        <label>Biography: <input type="text" onChange={handleBioChange}/></label>
                         <br /><br />
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

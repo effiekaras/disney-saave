@@ -9,8 +9,6 @@ import {API_URL} from '../constants';
 function EditProfile() {
     const {username} = useParams();
     const [user, setUser] = useState(null);
-    const [name, setName] = useState("");
-    const [bio, setBio] = useState("");
     const [avatar, setAvatar] = useState("");
     const whoIAm = localStorage.getItem("username") || "";
     const navigate = useNavigate();
@@ -23,18 +21,8 @@ function EditProfile() {
             setAvatar(response.data.data[0].avatar)
         });
     }, [username]);
-    const handleNameChange = event => {
-        setName(event.target.value);
-    };
-    const handleBioChange = event => {
-        setBio(event.target.value);
-    };
     const handleSubmit = event => {
         let new_data = {};
-        if (name)
-            new_data.name = name;
-        if (bio)
-            new_data.bio = bio;
         if (avatar)
             new_data.avatar = avatar;
         axios.put(`${API_URL}/users/${username}`, new_data).then(response => {
@@ -49,9 +37,12 @@ function EditProfile() {
         <div className="profile-container">
             <div className="spacing"></div>
             <div className="user">
-                <div className="user-snapshot">
-                    <img className="profile-pic" src={GetAvatar[avatar]} alt="default gray avatar"/>
+                <div className="avatar-snapshot">
+                    <img className="avatar-pic" src={GetAvatar[avatar]} alt="default gray avatar"/>
                     <br /><br /><br />
+                    <form onSubmit={handleSubmit} className= "submit">
+                        <button type="submit" class="btn btn-primary">SAVE</button>
+                    </form>
                     <div className="avatar-grid">
                         <div className="grid-item">
                             <button onClick={handleAvatarClick} value="Aladdin-Disney-Plus-Icon.png">
@@ -134,15 +125,6 @@ function EditProfile() {
                             </button>
                         </div>
                     </div>
-                </div>
-                <div className="user-details">
-                    <form onSubmit={handleSubmit}>
-                        <label>Name: <input type="text" onChange={handleNameChange}/></label>
-                        <br /><br />
-                        <label>Biography: <input type="text" onChange={handleBioChange}/></label>
-                        <br /><br />
-                        <button type="submit" class="btn btn-primary">SAVE</button>
-                    </form>
                 </div>
             </div>
         </div>

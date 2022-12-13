@@ -14,6 +14,7 @@ function Profile() {
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
     const whoIAm = localStorage.getItem("username") || "";
+
     useEffect(() => {
         if (whoIAm !== username) {
             navigate(`/user/${username}`, {replace: true});
@@ -21,7 +22,7 @@ function Profile() {
         axios.get(`${API_URL}/users/${username}`).then(response => {
             setUser(response.data.data[0]);
         });
-    }, [username]);
+    }, [user]);
 
     const LogOut = async() => {
         localStorage.setItem('username', '');
@@ -38,7 +39,7 @@ function Profile() {
                     <Button variant="primary" onClick = {LogOut}>Log Out</Button>
                     <br /><br />
                     <Link to={`/editprofile/${username}`}>
-                        <Button variant="primary">EDIT</Button>
+                        <Button variant="primary">Change Avatar</Button>
                     </Link>
                     <br /><br />
                     <p>Followers: {user && user.followers && user.followers.length}</p>
