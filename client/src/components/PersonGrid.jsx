@@ -26,7 +26,7 @@ export const PersonGrid = ({ people }) => {
     return (
         <PersonGridWrapper>
             {people.map((person) => {
-                return <PersonCard username={person.username} avatar={person.avatar} email={person.email} key={person.username} />
+                return <PersonCard username={person.username} avatar={person.avatar} name={person.name} key={person.username} />
             })}
         </PersonGridWrapper>
     )

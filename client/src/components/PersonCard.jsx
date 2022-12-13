@@ -6,6 +6,7 @@ import {isLoggedIn} from "../AuthComponents/Login.js";
 import Login from "../AuthComponents/Login.js"; 
 import { Navigate, useNavigate } from 'react-router-dom';
 import { API_URL } from '../constants';
+import GetAvatar from '../ProfileComponents/GetAvatar.js';
 
 const PersonCardWrapper = styled.div`
     display: inline-grid;
@@ -40,10 +41,12 @@ const PersonCardWrapper = styled.div`
         overflow: hidden;
         text-overflow: ellipsis;
         width: 180px;
+        text-decoration: none; 
     }
    
     img {
         margin-right:10px;
+        border-radius: 50%;
     }
     .emailprop {
         font-size: 1.2vw;
@@ -51,6 +54,9 @@ const PersonCardWrapper = styled.div`
         overflow: hidden;
         text-overflow: ellipsis;
         width: 180px;
+    }
+    a {
+        text-decoration: none; 
     }
 `
 
@@ -136,12 +142,12 @@ export const FollowButton = ({ username }) => {
 
 
 
-export const PersonCard = ({ username, email, avatar }) => {
+export const PersonCard = ({ username, name, avatar }) => {
 
     return (
         <PersonCardWrapper>
             <div>
-                <img src={defaultAvatar} />
+                <img src={GetAvatar[avatar]}/>
             </div>
             <div>
                 <a href={`/user/${username}`}> 
@@ -151,7 +157,7 @@ export const PersonCard = ({ username, email, avatar }) => {
                 </a>
                 <h3>
                     <div className='emailprop'>
-                        { email }
+                        { name }
                     </div>
                 </h3>
                 <FollowButton username={username} />

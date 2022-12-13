@@ -35,7 +35,7 @@ function Community() {
 
     useEffect(() => {
         // When query changes, filter people by their...?
-        const match = people.filter((p) => p.email?.includes(query) || p.username?.includes(query));
+        const match = people.filter((p) => p.email?.includes(query) || p.username?.includes(query) ||  p.name?.includes(query));
         setMatches(match);
     }, [query]);
 
