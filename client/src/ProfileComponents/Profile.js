@@ -1,6 +1,6 @@
 
 import React, {useState, useEffect} from 'react';
-import {useParams, Link, useNavigate} from 'react-router-dom';
+import {useParams, Link, useNavigate, Navigate} from 'react-router-dom';
 import axios from 'axios';
 import './Profile.scss';
 import GetAvatar from './GetAvatar.js';
@@ -22,12 +22,20 @@ function Profile() {
             setUser(response.data.data[0]);
         });
     }, [username]);
+
+    const LogOut = async() => {
+        localStorage.setItem('username', '');
+        navigate('/login');
+    }
+
     return (
         <div className="profile-container">
             <div className="spacing"></div>
             <div className="user">
                 <div className="user-snapshot">
                     <img className="profile-pic" src={user && GetAvatar[user.avatar]} alt="default gray avatar"/>
+                    <br></br>
+                    <Button variant="primary" onClick = {LogOut}>Log Out</Button>
                     <br /><br />
                     <Link to={`/editprofile/${username}`}>
                         <Button variant="primary">EDIT</Button>

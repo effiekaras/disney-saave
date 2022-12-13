@@ -15,6 +15,15 @@ function Login(props) {
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        var first_user = localStorage.getItem('username');
+        if (first_user.length > 0) {
+            let nuser = '/profile/'
+            nuser += first_user
+            navigate(nuser)
+        }
+    }, []);
+
     const handleSubmit = (e) => {
         e.preventDefault();
 

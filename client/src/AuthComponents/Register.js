@@ -21,7 +21,7 @@ function Register(props) {
             if (user.length === 0 || em.length === 0 || na.length === 0 || pass.length === 0) {
                 throw "Missing Required Fields";
             }
-            const response = await fetch(`${API_URL}users`, {
+            const response = await fetch(`${API_URL}/users`, {
              method: 'POST',
              headers: {
                'Content-Type': 'application/json'
