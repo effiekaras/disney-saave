@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import  GetAvatar from '../ProfileComponents/GetAvatar.js';
 
 import styled from 'styled-components';
 import defaultAvatar from '../ProfileComponents/avatars/grayavatar.png';
@@ -56,6 +57,10 @@ const PersonDetailWrapper = styled.div`
         margin-bottom: 15px;
         font-weight: normal;
     }
+
+    img {
+        border-radius: 50%;
+    }
     
 `
 
@@ -108,11 +113,11 @@ export const PersonDetail = () => {
         <PersonDetailWrapper>
             <div>
                 {/* placeholder img */}
-                <img src={defaultAvatar}/>
+                <img src={GetAvatar[info.avatar]}/>
             </div>
             <div>
                 <h1 className='username-prop'>
-                    @{ info.username }
+                    @{info.username }
                 </h1>
                 <div className='info-grid'>
                     <h3>Followers: {info.followers.length} </h3>

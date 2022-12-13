@@ -20,7 +20,6 @@ function Profile() {
         }
         axios.get(`${API_URL}/users/${username}`).then(response => {
             setUser(response.data.data[0]);
-
         });
     }, [username]);
     return (

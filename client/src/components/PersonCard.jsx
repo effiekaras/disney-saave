@@ -6,6 +6,9 @@ import {isLoggedIn} from "../AuthComponents/Login.js";
 import Login from "../AuthComponents/Login.js"; 
 import { Navigate, useNavigate } from 'react-router-dom';
 import { API_URL } from '../constants';
+import GetAvatar from '../ProfileComponents/GetAvatar.js';
+import Button from 'react-bootstrap/Button';
+
 
 const PersonCardWrapper = styled.div`
     display: inline-grid;
@@ -26,13 +29,30 @@ const PersonCardWrapper = styled.div`
     }
 
     .unfollowing {
-        background: none;
+        background: #D3D3D3;
     }
 
     button {
         width: 90px;
         margin: 30px;
         font-size: 16px;
+        color: black;
+        border: none;
+        box-shadow: 1px 1px grey;
+        outline: none;
+    }
+
+    button:hover {
+        filter: brightness(110%);
+        color: black;
+        outline: none;
+        box-shadow: 1px 1px grey;
+    }
+    button:target, button:active, button:focus, button:visited{
+        text-decoration: none;
+        color:black;
+        outline: none;
+        box-shadow: 1px 1px grey !important;
     }
     .usernameprop {
         font-size: 1.5vw;
@@ -40,10 +60,12 @@ const PersonCardWrapper = styled.div`
         overflow: hidden;
         text-overflow: ellipsis;
         width: 180px;
+        text-decoration: none; 
     }
    
     img {
         margin-right:10px;
+        border-radius: 50%;
     }
     .emailprop {
         font-size: 1.2vw;
@@ -51,6 +73,9 @@ const PersonCardWrapper = styled.div`
         overflow: hidden;
         text-overflow: ellipsis;
         width: 180px;
+    }
+    a {
+        text-decoration: none; 
     }
 `
 
@@ -127,21 +152,21 @@ export const FollowButton = ({ username }) => {
 
 
     return (
-        <button
+        <Button
             onClick={() => handleClick()}
             className={following ? 'following' : 'unfollowing'}
-        >{ following ? 'Followed' : 'Follow'}</button>
+        >{ following ? 'Followed' : 'Follow'}</Button>
     )
 }
 
 
 
-export const PersonCard = ({ username, email, avatar }) => {
+export const PersonCard = ({ username, name, avatar }) => {
 
     return (
         <PersonCardWrapper>
             <div>
-                <img src={defaultAvatar} />
+                <img src={GetAvatar[avatar]}/>
             </div>
             <div>
                 <a href={`/user/${username}`}> 
@@ -151,7 +176,7 @@ export const PersonCard = ({ username, email, avatar }) => {
                 </a>
                 <h3>
                     <div className='emailprop'>
-                        { email }
+                        { name }
                     </div>
                 </h3>
                 <FollowButton username={username} />
