@@ -1,6 +1,8 @@
 
 .avatar-snapshot {
     display: flex;
+    margin: auto;
+
 }
 
 .avatar-pic {
@@ -10,7 +12,7 @@
 }
 
 .submit {
-    diplay: flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -26,15 +28,18 @@
 
 .grid-item {
     img {
-        width: 100%;
+        width: 80px;
         border-radius: 50%;
     }
     button {
         border: black;
-        background-color: #4b9d7f;
+        background-color: transparent;
         color: white;
         text-align: center;
         text-decoration: none;
-        border-radius: 10%;
+        border-radius: 50%;
     }
+}
+.column {
+    margin: 20px;
 }

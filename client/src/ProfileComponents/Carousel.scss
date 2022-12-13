@@ -1,30 +1,18 @@
 .carousel-container {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    justify-content: flex-start;
     .slide {
-        display: none;
         .c-img-container {
             position: relative;
-            width: 50%;
-            margin: auto;
+            max-width: 80%;
+            width: 200px;
+            margin: 0;
             img {
                 width: 100%;
-            }
-            .prev, .next {
-                font-size: 30px;
-                position: absolute;
-                top: 50%;
-                padding: 5px 5px 0;
-            }
-            .prev {
-                left: 0;
-                transform: translate(-200%, -50%);
-            }
-            .next {
-                right: 0;
-                transform: translate(200%, -50%);
-            }
-            a:hover {
-                background-color: brown;
-                color: white;
+                min-width: 80px;
             }
         }
         .slide-text {
@@ -43,11 +31,11 @@
             opacity: 1;
         }
     }
-    .active {
-        display: block;
-    }
+    
 }
 
 .listTitle {
-    font-size: smaller;
+    font-size: 20px;
+    text-align: center;
+    text-decoration: underline black;
 }

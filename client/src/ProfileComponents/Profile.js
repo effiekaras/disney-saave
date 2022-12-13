@@ -34,16 +34,17 @@ function Profile() {
             <div className="spacing"></div>
             <div className="user">
                 <div className="user-snapshot">
-                    <img className="profile-pic" src={user && GetAvatar[user.avatar]} alt="default gray avatar"/>
+                    <img className="profile-pic" src={user && GetAvatar[user.avatar || "default"]}/>
                     <br></br>
-                    <Button variant="primary" onClick = {LogOut}>Log Out</Button>
-                    <br /><br />
-                    <Link to={`/editprofile/${username}`}>
-                        <Button variant="primary">Change Avatar</Button>
-                    </Link>
-                    <br /><br />
+                    <br></br>
                     <p>Followers: {user && user.followers && user.followers.length}</p>
                     <p>Following: {user && user.following && user.following.length}</p>
+                    <div className="col">
+                    <Link to={`/editprofile/${username}`}>
+                        <Button variant="primary"className="but">Change Avatar</Button>
+                    </Link>
+                    <Button variant="primary" className="but log" onClick = {LogOut}>Log Out</Button>
+                    </div>
                 </div>
                 <div className="user-details">
                     <div className="name-and-settings">

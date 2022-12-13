@@ -3,6 +3,7 @@ import {useParams, Link} from 'react-router-dom';
 import axios from 'axios';
 import './Carousel.scss';
 import {API_URL, MOVIE_API_KEY, MOVIE_API_URL} from '../constants';
+import { wait } from '@testing-library/user-event/dist/utils';
 
 const getImageFunc = (path) => path ? `https://image.tmdb.org/t/p/w342/${path}`
     : `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPcCjIVG3qv2QeXJ8vMgsoItp4-EzaL1oRb350awDfo0JgZuRASQXUSd2_p7yIGBv98b8&usqp=CAU`;
@@ -16,51 +17,48 @@ function Carousel(props) {
         if (props.list_id) {
             axios.get(`${API_URL}/lists/${props.list_id}`).then(response => {
                 const items = response.data.data.items;
+                console.log(items);
                 const title1 = response.data.data.name;
-                setTitle(title1);
-                let new_images = []
-                for (const movie_id of items) {
-                    axios.get(`${MOVIE_API_URL}/movie/${movie_id}?api_key=${MOVIE_API_KEY}&language=en-US`).then(response => {
-                        new_images.push(getImageFunc(response.data.poster_path));
-                    });
+                if (title1 == "Favorites") {
+                    setTitle("");
                 }
-                console.log(new_images);
-                setImages(new_images);
-            });
+                else {setTitle(title1);}
+                var new_images = []
+                for (const movie_id of items) {
+                    (async () => {
+                        await axios.get(`${MOVIE_API_URL}/movie/${movie_id}?api_key=${MOVIE_API_KEY}&language=en-US`).then(response => {
+                            new_images.push(response.data.poster_path);
+                        });
+                        setImages(new_images);
+                    })();
+                }
+            });  
         }
-    }, [images, title]);
+    }, [title]);
+
+
 
     const plusSlides = (n) => {
-        let new_slide = curr_slide + n
-        if (new_slide >= document.getElementsByClassName("slide").length)
+        let new_slide = curr_slide + n;
+        if (new_slide >= images.length)
             new_slide = 0;
+            setCurrSlide(new_slide);
         if (new_slide < 0)
-            new_slide = document.getElementsByClassName("slide").length - 1;
-        setCurrSlide(new_slide);
+            new_slide = images.length - 1;
+            setCurrSlide(new_slide);
     }
-    useEffect(() => {
-        let slides = document.getElementsByClassName("slide");
-        if (slides.length > 0) {
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].className.replace(" active", "");
-                slides[i].style.display = "none";
-            }
-            slides[curr_slide].className += " active";
-            slides[curr_slide].style.display = "block";
-        }
-    }, [curr_slide]);
+
     return (
+        <div>        <h3 className="listTitle">{title}</h3>
         <div className="carousel-container">
-        <h3 className="listTitle">{title}</h3>
         {images && images.map(img_src => (
-            <div className="slide fave active" key={img_src}>
+            <div className={`${props.list_id} fave active slide`} key={img_src}>
                 <div className="c-img-container">
-                    <img src={"./avatars/Goofy-Disney-Plus-Icon.png"}/>
-                    <a class="prev" onclick={plusSlides(-1)}>&#10094;</a>
-                    <a class="next" onclick={plusSlides(1)}>&#10095;</a>
+                    <img src={getImageFunc(img_src)}/>
                 </div>
             </div>
         ))}
+        </div>
         </div>
     )
 }

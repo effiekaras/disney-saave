@@ -7,6 +7,7 @@ import defaultAvatar from '../ProfileComponents/avatars/grayavatar.png';
 
 import { FollowButton } from './PersonCard';
 import { API_URL } from '../constants';
+import Carousel from '../ProfileComponents/Carousel.js'
 
 const PersonDetailWrapper = styled.div`
     text-align: center;
@@ -22,7 +23,30 @@ const PersonDetailWrapper = styled.div`
     }
 
     .unfollowing {
-        background: none;
+        background: #D3D3D3;
+    }
+
+    button {
+        width: 90px;
+        margin: 30px;
+        font-size: 16px;
+        color: black;
+        border: none;
+        box-shadow: 1px 1px grey;
+        outline: none;
+    }
+
+    button:hover {
+        filter: brightness(110%);
+        color: black;
+        outline: none;
+        box-shadow: 1px 1px grey;
+    }
+    button:target, button:active, button:focus, button:visited{
+        text-decoration: none;
+        color:black;
+        outline: none;
+        box-shadow: 1px 1px grey !important;
     }
 
     .info-grid{
@@ -50,7 +74,7 @@ const PersonDetailWrapper = styled.div`
         font-weight: normal;
     }
 
-    img {
+    .pfp {
         border-radius: 50%;
     }
     
@@ -104,8 +128,7 @@ export const PersonDetail = () => {
     return (
         <PersonDetailWrapper>
             <div>
-                {/* placeholder img */}
-                <img src={GetAvatar[info.avatar]}/>
+                <img className="pfp" src={GetAvatar[info.avatar]}/>
             </div>
             <div>
                 <h1 className='username-prop'>
@@ -121,6 +144,13 @@ export const PersonDetail = () => {
                     { info.bio !== "" ? info.bio : "I am a student at UIUC. #seniors"  }
                 </h3>
                 <FollowButton username={info.username} />
+
+                <h2>Favorites:</h2>
+                <Carousel list_id={info && info.lists[0]}/>
+                <h2>Custom Lists:</h2>
+                {info && info.lists.slice(1).map(list_id => (
+                    <Carousel list_id={list_id} key={list_id}/>
+                ))}
             </div>
         </PersonDetailWrapper>
     )

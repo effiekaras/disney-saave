@@ -38,11 +38,13 @@ function EditProfile() {
             <div className="spacing"></div>
             <div className="user">
                 <div className="avatar-snapshot">
+                    <div className="column">
                     <img className="avatar-pic" src={GetAvatar[avatar]} alt="default gray avatar"/>
                     <br /><br /><br />
                     <form onSubmit={handleSubmit} className= "submit">
-                        <button type="submit" class="btn btn-primary">SAVE</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </form>
+                    </div>
                     <div className="avatar-grid">
                         <div className="grid-item">
                             <button onClick={handleAvatarClick} value="Aladdin-Disney-Plus-Icon.png">
