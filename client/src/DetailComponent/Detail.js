@@ -19,6 +19,8 @@ function Detail() {
     const [basicModal, setBasicModal] = useState(false);
     const [lists, setLists] = React.useState([]);
     const toggleShow = () => setBasicModal(!basicModal);
+    const [newListModal, setNewListModal] = useState(false);
+    const toggleNewListShow = () => setNewListModal(!newListModal);
     const api = axios.create({ baseURL: BASE_URL });
 
     const [data, setData] = React.useState([]);
@@ -28,6 +30,7 @@ function Detail() {
     const [genre, setGenre] = React.useState([]);
     const [release, setRelease] = React.useState("");
     const [info, setInfo] = useState({});
+    const [listName, setName] = useState('');
     
     const username = localStorage.getItem("username");
     function getImageFunc(path) {
@@ -128,7 +131,7 @@ function Detail() {
     const AddToList = (listId, movieId) => {
         // window.alert(`add to ${name}`)
         // add da thing to da thingy (thats what she said lmfao)
-
+        toggleShow();
         fetch(`${API_URL}/lists/${listId}`, {
             method: 'PUT',
             headers: {
@@ -140,10 +143,16 @@ function Detail() {
         })
     }
 
+    const openNewListModal = () => {
+        toggleShow();
+        toggleNewListShow();
+    }
+
     const CreateNewList = async() => {
         const whoIAm = localStorage.getItem('username') || '';
-        const nameOfList = window.prompt("create a new list")
-        
+        //const nameOfList = window.prompt("create a new list")
+        //console.log("hello")
+        toggleNewListShow();
         try {
             await fetch(`${API_URL}/lists`, {
                 method: 'POST',
@@ -152,7 +161,7 @@ function Detail() {
                 },
 
                 body: JSON.stringify({
-                    "name" : nameOfList,
+                    "name" : listName,
                     "owner" : whoIAm,
                     "items": id
                 })
@@ -160,6 +169,7 @@ function Detail() {
         } catch(err) {
             console.log(err);
         }
+        
     }
 
 
@@ -183,19 +193,14 @@ return (
         <div className="text">Add to List</div>
         </Button>
 
-        <Modal className="modal" show={basicModal}  tabIndex='-1'>
+        <Modal className="modal" id="myModal" show={basicModal}  tabIndex='-1'>
         <button id="x" onClick={toggleShow}>&#10006;</button>
-        <div className="modalBox">
+        <div className="modalBox" id="MyModal">
             <span id="modalTitle">Which list would you like to add this to?</span>
             <div id="listContainer">
             {lists.map((l) => {
-                if (info.lists.includes(l._id)) {
-                    return (
-                        <div id="listBox" style={{pointerEvents: 'none'}} onClick={() => null}>
-                            <div className="listName">{l.name} (Added)</div>
-                        </div>
-                    )
-                }
+               
+                
                 return (
                 <div id="listBox" onClick={() => AddToList(l._id, id)}>
                     <div className="listName">{l.name}</div>
@@ -203,9 +208,19 @@ return (
             )}
             )}    
             </div>
-            <button onClick={CreateNewList} id="createList">Create a New List</button>
+            <button onClick={openNewListModal} id="createList">Create a New List</button>
         </div>
         </Modal>
+        <Modal className="modal" id="newListModal" show={newListModal} >
+        <button id="x" onClick={toggleNewListShow}>&#10006;</button>
+            <div className="modalBox" id="MyModal">
+                <span id="modalTitle">Enter a New List Name</span>
+                <input type="text" className="list-name" onChange={(e) => setName(e.target.value)} placeholder={"Enter New Name"}/>
+                <div style= {{height:"60px"}}></div>
+                <button onClick={CreateNewList} id="createList">Create a New List</button>
+            </div>
+        </Modal>
+        
     </>
 
     <Button className="detailButton">
